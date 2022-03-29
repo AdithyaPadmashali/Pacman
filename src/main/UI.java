@@ -12,10 +12,16 @@ public class UI {
     int x;
     int y;
 
+    // for title screen
+    int numberOfTitleOptions;
+    int optionNumber;
+
     public UI(GamePanel gp, KeyHandler keyH) {
-        this.x = 6 * gp.tileSize;
-        this.y = 6 * gp.tileSize;
+        this.x = 3 * gp.tileSize;
+        this.y = 3 * gp.tileSize;
         this.gp = gp;
+        this.optionNumber = 0;
+        this.numberOfTitleOptions = 3;
         this.keyH = keyH;
         arial_40 = new Font("Cambria", Font.PLAIN, 40);
     }
@@ -28,12 +34,37 @@ public class UI {
         // Display the pause screen
         if (gp.paused) {
             this.displayPause(g2);
+        } else if (gp.atTitleScreen) {
+            this.displayTitleScreen(g2);
+        }
+    }
+
+    private void displayTitleScreen(Graphics2D g2) {
+
+        // Draw the title in bold
+        g2.drawString("PACMAN", x + 3 * gp.tileSize, y);
+        g2.drawString("PACMAN", x + 3 * gp.tileSize + 2, y + 2);
+
+        // draw options
+        g2.drawString("New Game", x + 3 * gp.tileSize, y + gp.tileSize * 3);
+        if (optionNumber == 0) {
+            g2.drawString(">", x + 2 * gp.tileSize, y + gp.tileSize * 3);
+        }
+
+        g2.drawString("Load Game", x + 3 * gp.tileSize, y + gp.tileSize * 4);
+        if (optionNumber == 1) {
+            g2.drawString(">", x + 2 * gp.tileSize, y + gp.tileSize * 4);
+        }
+
+        g2.drawString("Exit", x + 3 * gp.tileSize, y + gp.tileSize * 5);
+        if (optionNumber == 2) {
+            g2.drawString(">", x + 2 * gp.tileSize, y + gp.tileSize * 5);
         }
     }
 
     public void displayPause(Graphics2D g2) {
-        g2.drawString("PAUSED", x, y);
-        g2.drawString("press p to resume", x - gp.tileSize, y + gp.tileSize);
+        g2.drawString("PAUSED", x + 4 * gp.tileSize, y);
+        g2.drawString("press p to resume", x + 2 * gp.tileSize, y + gp.tileSize);
     }
 
 }

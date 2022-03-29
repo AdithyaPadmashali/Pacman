@@ -19,6 +19,21 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
+
+        // For the title screen
+        if (code == KeyEvent.VK_DOWN) {
+            gp.ui.optionNumber += 1;
+            gp.ui.optionNumber %= gp.ui.numberOfTitleOptions;
+        }
+        if (code == KeyEvent.VK_UP) {
+            if (gp.ui.optionNumber <= 0) {
+                gp.ui.optionNumber = gp.ui.numberOfTitleOptions - 1;
+            } else {
+                gp.ui.optionNumber--;
+            }
+        }
+
+        // for player movement
         if (code == KeyEvent.VK_W) {
             upPressed = true;
         }
@@ -48,9 +63,33 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_D) {
             rightPressed = false;
         }
+
+        // for pausing the game
         if (code == KeyEvent.VK_P) {
             gp.paused = !gp.paused;
+        }
 
+        // for exiting from the title screen
+        if (code == KeyEvent.VK_ENTER && gp.ui.optionNumber == 2) {
+            System.exit(0);
+        }
+
+        // for starting the new game from the title screen
+        if (code == KeyEvent.VK_ENTER && gp.ui.optionNumber == 0) {
+            gp.atTitleScreen = false;
+            gp.playing = true;
+        }
+
+        // for starting the loaded game from the title screen
+        if (code == KeyEvent.VK_ENTER && gp.ui.optionNumber == 1) {
+            // yet to implement
+        }
+
+        // press esc to return to title screen while playing the game or while paused
+        if (code == KeyEvent.VK_ESCAPE) {
+            gp.playing = false;
+            gp.paused = false;
+            gp.atTitleScreen = true;
         }
 
     }
