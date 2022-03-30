@@ -16,12 +16,18 @@ public class UI {
     int numberOfTitleOptions;
     int optionNumber;
 
+    // for select difficulty screen
+    int numberOfDifficulties;
+    int difficulty;
+
     public UI(GamePanel gp, KeyHandler keyH) {
         this.x = 3 * gp.tileSize;
         this.y = 3 * gp.tileSize;
         this.gp = gp;
         this.optionNumber = 0;
         this.numberOfTitleOptions = 3;
+        this.numberOfDifficulties = 3;
+        this.difficulty = 0;
         this.keyH = keyH;
         arial_40 = new Font("Cambria", Font.PLAIN, 40);
     }
@@ -36,6 +42,29 @@ public class UI {
             this.displayPause(g2);
         } else if (gp.atTitleScreen) {
             this.displayTitleScreen(g2);
+        } else if (gp.atSelectDifficulty) {
+            this.displaySelectDifficulty(g2);
+        }
+    }
+
+    private void displaySelectDifficulty(Graphics2D g2) {
+        // Draw the title in bold
+        g2.drawString("Select Difficulty", x + 3 * gp.tileSize, y);
+
+        // draw options
+        g2.drawString("Easy", x + 3 * gp.tileSize, y + gp.tileSize * 3);
+        if (difficulty == 0) {
+            g2.drawString(">", x + 2 * gp.tileSize, y + gp.tileSize * 3);
+        }
+
+        g2.drawString("Medium", x + 3 * gp.tileSize, y + gp.tileSize * 4);
+        if (difficulty == 1) {
+            g2.drawString(">", x + 2 * gp.tileSize, y + gp.tileSize * 4);
+        }
+
+        g2.drawString("Hard", x + 3 * gp.tileSize, y + gp.tileSize * 5);
+        if (difficulty == 2) {
+            g2.drawString(">", x + 2 * gp.tileSize, y + gp.tileSize * 5);
         }
     }
 

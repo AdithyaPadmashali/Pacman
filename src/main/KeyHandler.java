@@ -21,16 +21,34 @@ public class KeyHandler implements KeyListener {
         int code = e.getKeyCode();
 
         // For the title screen
-        if (code == KeyEvent.VK_DOWN) {
-            gp.ui.optionNumber += 1;
-            gp.ui.optionNumber %= gp.ui.numberOfTitleOptions;
-        }
-        if (code == KeyEvent.VK_UP) {
-            if (gp.ui.optionNumber <= 0) {
-                gp.ui.optionNumber = gp.ui.numberOfTitleOptions - 1;
-            } else {
-                gp.ui.optionNumber--;
+        if (gp.atTitleScreen) {
+            if (code == KeyEvent.VK_DOWN) {
+                gp.ui.optionNumber += 1;
+                gp.ui.optionNumber %= gp.ui.numberOfTitleOptions;
             }
+            if (code == KeyEvent.VK_UP) {
+                if (gp.ui.optionNumber <= 0) {
+                    gp.ui.optionNumber = gp.ui.numberOfTitleOptions - 1;
+                } else {
+                    gp.ui.optionNumber--;
+                }
+            }
+        }
+
+        // for the difficulty screen
+        if (gp.atSelectDifficulty) {
+            if (code == KeyEvent.VK_DOWN) {
+                gp.ui.difficulty += 1;
+                gp.ui.difficulty %= gp.ui.numberOfDifficulties;
+            }
+            if (code == KeyEvent.VK_UP) {
+                if (gp.ui.difficulty <= 0) {
+                    gp.ui.difficulty = gp.ui.numberOfDifficulties - 1;
+                } else {
+                    gp.ui.difficulty--;
+                }
+            }
+
         }
 
         // for player movement
@@ -77,7 +95,18 @@ public class KeyHandler implements KeyListener {
         // for starting the new game from the title screen
         if (code == KeyEvent.VK_ENTER && gp.ui.optionNumber == 0) {
             gp.atTitleScreen = false;
-            gp.playing = true;
+            gp.atSelectDifficulty = true;
+            // gp.playing = true;
+        }
+
+        // Select difficulty after the title screen
+        if (gp.atSelectDifficulty) {
+            if (code == KeyEvent.VK_SPACE) {
+                gp.difficulty = gp.ui.difficulty;
+                gp.difficultyChosen = true;
+                gp.atSelectDifficulty = false;
+                gp.playing = true;
+            }
         }
 
         // for starting the loaded game from the title screen
