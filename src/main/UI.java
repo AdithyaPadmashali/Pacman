@@ -66,6 +66,9 @@ public class UI {
         if (difficulty == 2) {
             g2.drawString(">", x + 2 * gp.tileSize, y + gp.tileSize * 5);
         }
+
+        g2.drawString("Press SpaceBar to start...", x + 1 * gp.tileSize, y + gp.tileSize * 8);
+
     }
 
     private void displayTitleScreen(Graphics2D g2) {
