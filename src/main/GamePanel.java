@@ -25,7 +25,6 @@ public class GamePanel extends JPanel implements Runnable {
     public boolean atTitleScreen;
     public boolean playing;
     public boolean atSelectDifficulty;
-    public boolean difficultyChosen;
     public int difficulty;
 
     // FPS
@@ -46,7 +45,6 @@ public class GamePanel extends JPanel implements Runnable {
         this.atSelectDifficulty = false;
         this.atTitleScreen = true;
         this.playing = false;
-        this.difficultyChosen = false;
         this.difficulty = 0;
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
@@ -100,7 +98,7 @@ public class GamePanel extends JPanel implements Runnable {
             ui.draw(g2);
         } else if (this.atSelectDifficulty) {
             ui.draw(g2);
-        } else if (this.playing && this.difficultyChosen) {
+        } else if (this.playing) {
             player.draw(g2);
         }
         g2.dispose();

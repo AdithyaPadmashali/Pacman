@@ -103,7 +103,6 @@ public class KeyHandler implements KeyListener {
         if (gp.atSelectDifficulty) {
             if (code == KeyEvent.VK_SPACE) {
                 gp.difficulty = gp.ui.difficulty;
-                gp.difficultyChosen = true;
                 gp.atSelectDifficulty = false;
                 gp.playing = true;
             }
