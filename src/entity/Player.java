@@ -67,7 +67,5 @@ public class Player extends Entity {
         }
 
         g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
-        // g2.setColor(Color.white);
-        // g2.fillRect(x, y, gp.tileSize, gp.tileSize);
     }
 }
