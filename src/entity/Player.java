@@ -12,9 +12,12 @@ public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
 
+    boolean openMouth;
+
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.keyH = keyH;
+        this.openMouth = true;
         this.setDefaultValues();
         this.getPlayerImage();
     }
@@ -27,6 +30,10 @@ public class Player extends Entity {
             left = ImageIO.read(getClass().getResourceAsStream("/pacman-left.png"));
             up = ImageIO.read(getClass().getResourceAsStream("/topfromleft.png"));
             down = ImageIO.read(getClass().getResourceAsStream("/downfromleft.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("/pacman-right1.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("/pacman-left1.png"));
+            up1 = ImageIO.read(getClass().getResourceAsStream("/topfromleft1.png"));
+            down1 = ImageIO.read(getClass().getResourceAsStream("/downfromleft1.png"));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,6 +65,13 @@ public class Player extends Entity {
             direction = "right";
             x += speed;
         }
+
+        animCounter++;
+        if (animCounter == 15) {
+            this.openMouth = !this.openMouth;
+            animCounter = 0;
+        }
+
     }
 
     public void draw(Graphics2D g2) {
@@ -66,16 +80,32 @@ public class Player extends Entity {
 
         switch (direction) {
             case "right":
-                image = right;
+                if (this.openMouth) {
+                    image = right;
+                } else if (!this.openMouth) {
+                    image = right1;
+                }
                 break;
             case "left":
-                image = left;
+                if (this.openMouth) {
+                    image = left;
+                } else if (!this.openMouth) {
+                    image = left1;
+                }
                 break;
             case "up":
-                image = up;
+                if (this.openMouth) {
+                    image = up;
+                } else if (!this.openMouth) {
+                    image = up1;
+                }
                 break;
             case "down":
-                image = down;
+                if (this.openMouth) {
+                    image = down;
+                } else if (!this.openMouth) {
+                    image = down1;
+                }
                 break;
         }
 

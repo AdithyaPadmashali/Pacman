@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.Dimension;
 
+import entity.NPCGreen;
 import entity.Player;
 
 public class GamePanel extends JPanel implements Runnable {
@@ -33,12 +34,8 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
     KeyHandler keyH = new KeyHandler(this);
     Player player = new Player(this, keyH);
+    NPCGreen NPCGreen = new NPCGreen(this, keyH, player);
     UI ui = new UI(this, keyH);
-
-    // set the player's default position
-    // int playerX = 100;
-    // int playerY = 100;
-    // int playerSpeed = 4;
 
     public GamePanel() {
         this.paused = false;
@@ -82,6 +79,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void update() {
         if (!this.paused) {
             player.update();
+            NPCGreen.update();
         }
     }
 
@@ -99,6 +97,7 @@ public class GamePanel extends JPanel implements Runnable {
         } else if (this.atSelectDifficulty) {
             ui.draw(g2);
         } else if (this.playing) {
+            NPCGreen.draw(g2);
             player.draw(g2);
         }
         g2.dispose();
