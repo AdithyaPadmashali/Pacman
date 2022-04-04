@@ -38,6 +38,29 @@ public class NPCGreen extends Entity {
     public void update() {
         // System.out.println("detected pacman at x=" + pacman.x + " and y=" +
         // pacman.y);
+        double r_direction =(int)((Math.random() * (5 - 1)) + 1);
+        // 1:up , 2:down , 3:left , 4:right
+        if(r_direction == 1)
+        {   direction = "up";
+            y-=speed;
+        }
+        if(r_direction == 2)
+        {
+            direction = "down";
+            y+=speed;
+        }
+        if(r_direction == 3)
+        {
+            direction ="left";
+            x-=speed;
+        }
+        if(r_direction == 4)
+        {
+            direction = "rigth";
+            x+=speed;
+        }
+
+
     }
 
     public void draw(Graphics2D g2) {
