@@ -25,6 +25,9 @@ public class Player extends Entity {
             // left = ImageIO.read(getClass().getResourceAsStream("/left.png"));
             right = ImageIO.read(getClass().getResourceAsStream("/pacman-right.png"));
             left = ImageIO.read(getClass().getResourceAsStream("/pacman-left.png"));
+            up = ImageIO.read(getClass().getResourceAsStream("/topfromleft.png"));
+            down = ImageIO.read(getClass().getResourceAsStream("/downfromleft.png"));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -40,9 +43,11 @@ public class Player extends Entity {
 
     public void update() {
         if (keyH.upPressed) {
+            direction = "up";
             y -= speed;
         }
         if (keyH.downPressed) {
+            direction = "down";
             y += speed;
         }
         if (keyH.leftPressed) {
@@ -65,6 +70,12 @@ public class Player extends Entity {
                 break;
             case "left":
                 image = left;
+                break;
+            case "up":
+                image = up;
+                break;
+            case "down":
+                image = down;
                 break;
         }
 

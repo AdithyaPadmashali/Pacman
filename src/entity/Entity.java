@@ -8,6 +8,6 @@ public class Entity {
     public int x, y;
     public int speed;
 
-    public BufferedImage right, left;
+    public BufferedImage right, left, down, up;
     public String direction;
 }
