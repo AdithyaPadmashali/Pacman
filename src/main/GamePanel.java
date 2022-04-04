@@ -8,6 +8,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import entity.NPCGreen;
+import entity.NPCBlue;
+import entity.NPCPurple;
+import entity.NPCWhite;
 import entity.Player;
 
 public class GamePanel extends JPanel implements Runnable {
@@ -35,6 +38,9 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHandler keyH = new KeyHandler(this);
     Player player = new Player(this, keyH);
     NPCGreen NPCGreen = new NPCGreen(this, keyH, player);
+    NPCBlue NPCBlue = new NPCBlue(this, keyH, player);
+    NPCPurple NPCPurple = new NPCPurple(this, keyH, player);
+    NPCWhite NPCWhite = new NPCWhite(this, keyH, player);
     Maze maze = new Maze(this, keyH);
     UI ui = new UI(this, keyH);
 
@@ -81,6 +87,10 @@ public class GamePanel extends JPanel implements Runnable {
         if (!this.paused) {
             player.update();
             NPCGreen.update();
+            NPCBlue.update();
+            NPCPurple.update();
+            NPCWhite.update();
+            
             maze.update();
         }
     }
@@ -100,6 +110,9 @@ public class GamePanel extends JPanel implements Runnable {
             ui.draw(g2);
         } else if (this.playing) {
             NPCGreen.draw(g2);
+            NPCBlue.draw(g2);
+            NPCPurple.draw(g2);
+            NPCWhite.draw(g2);
             player.draw(g2);
             maze.draw(g2);
         }
