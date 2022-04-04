@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 
 public class Player extends Entity {
+
     GamePanel gp;
     KeyHandler keyH;
 

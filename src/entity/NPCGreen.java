@@ -2,7 +2,7 @@ package entity;
 
 import main.KeyHandler;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
+// import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
@@ -33,11 +33,11 @@ public class NPCGreen extends Entity {
         x = 200;
         y = 200;
         speed = 4;
-
     }
 
     public void update() {
-        System.out.println("detected pacman at x=" + pacman.x + " and y=" + pacman.y);
+        // System.out.println("detected pacman at x=" + pacman.x + " and y=" +
+        // pacman.y);
     }
 
     public void draw(Graphics2D g2) {

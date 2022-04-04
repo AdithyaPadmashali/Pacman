@@ -35,6 +35,7 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHandler keyH = new KeyHandler(this);
     Player player = new Player(this, keyH);
     NPCGreen NPCGreen = new NPCGreen(this, keyH, player);
+    Maze maze = new Maze(this, keyH);
     UI ui = new UI(this, keyH);
 
     public GamePanel() {
@@ -80,6 +81,7 @@ public class GamePanel extends JPanel implements Runnable {
         if (!this.paused) {
             player.update();
             NPCGreen.update();
+            maze.update();
         }
     }
 
@@ -99,6 +101,7 @@ public class GamePanel extends JPanel implements Runnable {
         } else if (this.playing) {
             NPCGreen.draw(g2);
             player.draw(g2);
+            maze.draw(g2);
         }
         g2.dispose();
     }
