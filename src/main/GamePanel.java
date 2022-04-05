@@ -85,13 +85,13 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
         if (!this.paused) {
+            maze.update();
             player.update();
             NPCGreen.update();
             NPCBlue.update();
             NPCPurple.update();
             NPCWhite.update();
-            
-            maze.update();
+
         }
     }
 
@@ -109,12 +109,12 @@ public class GamePanel extends JPanel implements Runnable {
         } else if (this.atSelectDifficulty) {
             ui.draw(g2);
         } else if (this.playing) {
+            maze.draw(g2);
             NPCGreen.draw(g2);
             NPCBlue.draw(g2);
             NPCPurple.draw(g2);
             NPCWhite.draw(g2);
             player.draw(g2);
-            maze.draw(g2);
         }
         g2.dispose();
     }

@@ -21,40 +21,86 @@ public class Maze {
 
     public BufferedImage wall;
 
-    private int test[][] = { { 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1 }, { 0, 0, 0, 0, 0 }, { 1, 1, 1, 1, 1 } };
+    // private int test[][] = { { 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1 }, { 0, 0, 0, 0,
+    // 0 }, { 1, 1, 1, 1, 1 } };
 
-    private int board[][] = {
-            { W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W },
-            { W, F, F, F, F, F, F, F, F, F, F, F, F, W, W, F, F, F, F, F, F, F, F, F, F, F, F, W },
-            { W, F, W, W, W, W, F, W, W, W, W, W, F, W, W, F, W, W, W, W, W, F, W, W, W, W, F, W },
-            { W, F, W, W, W, W, F, W, W, W, W, W, F, W, W, F, W, W, W, W, W, F, W, W, W, W, F, W },
-            { W, F, W, W, W, W, F, W, W, W, W, W, F, W, W, F, W, W, W, W, W, F, W, W, W, W, F, W },
-            { W, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, W },
-            { W, F, W, W, W, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, W, W, W, F, W },
-            { W, F, W, W, W, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, W, W, W, F, W },
-            { W, F, F, F, F, F, F, W, W, F, F, F, F, W, W, F, F, F, F, W, W, F, F, F, F, F, F, W },
-            { W, W, W, W, W, W, F, W, W, W, W, W, F, W, W, F, W, W, W, W, W, F, W, W, W, W, W, W },
-            { E, E, E, E, E, W, F, W, W, W, W, W, F, W, W, F, W, W, W, W, W, F, W, E, E, E, E, E },
-            { E, E, E, E, E, W, F, W, W, F, F, F, F, F, F, F, F, F, F, W, W, F, W, E, E, E, E, E },
-            { E, E, E, E, E, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, E, E, E, E, E },
-            { W, W, W, W, W, W, F, W, W, F, W, E, E, E, E, E, E, W, F, W, W, F, W, W, W, W, W, W },
-            { F, F, F, F, F, F, F, F, F, F, W, E, E, E, E, E, E, W, F, F, F, F, F, F, F, F, F, F },
-            { W, W, W, W, W, W, F, W, W, F, W, E, E, E, E, E, E, W, F, W, W, F, W, W, W, W, W, W },
-            { E, E, E, E, E, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, E, E, E, E, E },
-            { E, E, E, E, E, W, F, W, W, F, F, F, F, F, F, F, F, F, F, W, W, F, W, E, E, E, E, E },
-            { E, E, E, E, E, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, E, E, E, E, E },
-            { W, W, W, W, W, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, W, W, W, W, W },
-            { W, F, F, F, F, F, F, F, F, F, F, F, F, W, W, F, F, F, F, F, F, F, F, F, F, F, F, W },
-            { W, F, W, W, W, W, F, W, W, W, W, W, F, W, W, F, W, W, W, W, W, F, W, W, W, W, F, W },
-            { W, F, W, W, W, W, F, W, W, W, W, W, F, W, W, F, W, W, W, W, W, F, W, W, W, W, F, W },
-            { W, F, F, F, W, W, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, W, W, F, F, F, W },
-            { W, W, W, F, W, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, W, F, W, W, W },
-            { W, W, W, F, W, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, W, F, W, W, W },
-            { W, F, F, F, F, F, F, W, W, F, F, F, F, W, W, F, F, F, F, W, W, F, F, F, F, F, F, W },
-            { W, F, W, W, W, W, W, W, W, W, W, W, F, W, W, F, W, W, W, W, W, W, W, W, W, W, F, W },
-            { W, F, W, W, W, W, W, W, W, W, W, W, F, W, W, F, W, W, W, W, W, W, W, W, W, W, F, W },
-            { W, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, W },
-            { W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W }
+    // private int board[][] = {
+    // { W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W,
+    // W, W, W },
+    // { W, F, F, F, F, F, F, F, F, F, F, F, F, W, W, F, F, F, F, F, F, F, F, F, F,
+    // F, F, W },
+    // { W, F, W, W, W, W, F, W, W, W, W, W, F, W, W, F, W, W, W, W, W, F, W, W, W,
+    // W, F, W },
+    // { W, F, W, W, W, W, F, W, W, W, W, W, F, W, W, F, W, W, W, W, W, F, W, W, W,
+    // W, F, W },
+    // { W, F, W, W, W, W, F, W, W, W, W, W, F, W, W, F, W, W, W, W, W, F, W, W, W,
+    // W, F, W },
+    // { W, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,
+    // F, F, W },
+    // { W, F, W, W, W, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, W, W,
+    // W, F, W },
+    // { W, F, W, W, W, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, W, W,
+    // W, F, W },
+    // { W, F, F, F, F, F, F, W, W, F, F, F, F, W, W, F, F, F, F, W, W, F, F, F, F,
+    // F, F, W },
+    // { W, W, W, W, W, W, F, W, W, W, W, W, F, W, W, F, W, W, W, W, W, F, W, W, W,
+    // W, W, W },
+    // { E, E, E, E, E, W, F, W, W, W, W, W, F, W, W, F, W, W, W, W, W, F, W, E, E,
+    // E, E, E },
+    // { E, E, E, E, E, W, F, W, W, F, F, F, F, F, F, F, F, F, F, W, W, F, W, E, E,
+    // E, E, E },
+    // { E, E, E, E, E, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, E, E,
+    // E, E, E },
+    // { W, W, W, W, W, W, F, W, W, F, W, E, E, E, E, E, E, W, F, W, W, F, W, W, W,
+    // W, W, W },
+    // { F, F, F, F, F, F, F, F, F, F, W, E, E, E, E, E, E, W, F, F, F, F, F, F, F,
+    // F, F, F },
+    // { W, W, W, W, W, W, F, W, W, F, W, E, E, E, E, E, E, W, F, W, W, F, W, W, W,
+    // W, W, W },
+    // { E, E, E, E, E, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, E, E,
+    // E, E, E },
+    // { E, E, E, E, E, W, F, W, W, F, F, F, F, F, F, F, F, F, F, W, W, F, W, E, E,
+    // E, E, E },
+    // { E, E, E, E, E, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, E, E,
+    // E, E, E },
+    // { W, W, W, W, W, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, W, W,
+    // W, W, W },
+    // { W, F, F, F, F, F, F, F, F, F, F, F, F, W, W, F, F, F, F, F, F, F, F, F, F,
+    // F, F, W },
+    // { W, F, W, W, W, W, F, W, W, W, W, W, F, W, W, F, W, W, W, W, W, F, W, W, W,
+    // W, F, W },
+    // { W, F, W, W, W, W, F, W, W, W, W, W, F, W, W, F, W, W, W, W, W, F, W, W, W,
+    // W, F, W },
+    // { W, F, F, F, W, W, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, W, W, F,
+    // F, F, W },
+    // { W, W, W, F, W, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, W, F,
+    // W, W, W },
+    // { W, W, W, F, W, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, W, F,
+    // W, W, W },
+    // { W, F, F, F, F, F, F, W, W, F, F, F, F, W, W, F, F, F, F, W, W, F, F, F, F,
+    // F, F, W },
+    // { W, F, W, W, W, W, W, W, W, W, W, W, F, W, W, F, W, W, W, W, W, W, W, W, W,
+    // W, F, W },
+    // { W, F, W, W, W, W, W, W, W, W, W, W, F, W, W, F, W, W, W, W, W, W, W, W, W,
+    // W, F, W },
+    // { W, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,
+    // F, F, W },
+    // { W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W,
+    // W, W, W }
+    // };
+
+    private int[][] board = { { W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W },
+            { W, F, F, F, F, F, F, F, F, F, F, F, F, F, F, W },
+            { W, F, W, W, W, W, F, W, W, F, W, W, W, W, F, W },
+            { W, F, W, W, W, W, F, W, W, F, W, W, W, W, F, W },
+            { W, F, F, F, F, F, F, W, W, F, F, F, F, F, F, W },
+            { W, W, W, F, W, W, W, W, W, W, W, W, F, W, W, W },
+            { W, F, F, F, F, F, F, W, W, F, F, F, F, F, F, W },
+            { F, F, W, W, W, W, F, W, W, F, W, W, W, W, F, F },
+            { W, F, W, W, W, W, F, W, W, F, W, W, W, W, F, W },
+            { W, F, F, F, F, F, F, W, W, F, F, F, F, F, F, W },
+            { W, F, W, W, W, W, F, F, F, F, W, W, W, W, F, W },
+            { W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W }
     };
 
     public Maze(GamePanel gp, KeyHandler KeyH) {
@@ -73,8 +119,8 @@ public class Maze {
     }
 
     public void setDefaultValues() {
-        x = 400;
-        y = 100;
+        x = 0;
+        y = 0;
     }
 
     public void update() {
@@ -84,14 +130,15 @@ public class Maze {
 
     public void draw(Graphics2D g2) {
 
-        for (int i = 0; i < test.length; i++) {
-            for (int j = 0; j < test[i].length; j++) {
-                if (test[i][j] == 1) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j] == 1) {
                     g2.drawImage(wall, x, y, gp.tileSize, gp.tileSize, null);
-                    this.x += gp.tileSize;
                 }
-                this.y += gp.tileSize;
+                this.x += gp.tileSize;
             }
+            this.x = 0;
+            this.y += gp.tileSize;
         }
         this.setDefaultValues();
     }
