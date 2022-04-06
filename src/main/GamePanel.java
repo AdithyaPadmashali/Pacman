@@ -36,12 +36,12 @@ public class GamePanel extends JPanel implements Runnable {
 
     Thread gameThread;
     KeyHandler keyH = new KeyHandler(this);
+    Maze maze = new Maze(this, keyH);
     Player player = new Player(this, keyH);
     NPCGreen NPCGreen = new NPCGreen(this, keyH, player);
     NPCBlue NPCBlue = new NPCBlue(this, keyH, player);
     NPCPurple NPCPurple = new NPCPurple(this, keyH, player);
     NPCWhite NPCWhite = new NPCWhite(this, keyH, player);
-    Maze maze = new Maze(this, keyH);
     UI ui = new UI(this, keyH);
 
     public GamePanel() {

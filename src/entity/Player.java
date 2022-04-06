@@ -13,11 +13,13 @@ public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
 
+    boolean collided;
     boolean openMouth;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.keyH = keyH;
+        this.collided = false;
         this.openMouth = true;
         this.setDefaultValues();
         this.getPlayerImage();
@@ -46,25 +48,28 @@ public class Player extends Entity {
         y = 100;
         speed = 4;
         direction = "right";
-
     }
 
     public void update() {
         if (keyH.upPressed) {
             direction = "up";
-            y -= speed;
+            if (!collided)
+                y -= speed;
         }
         if (keyH.downPressed) {
             direction = "down";
-            y += speed;
+            if (!collided)
+                y += speed;
         }
         if (keyH.leftPressed) {
             direction = "left";
-            x -= speed;
+            if (!collided)
+                x -= speed;
         }
         if (keyH.rightPressed) {
             direction = "right";
-            x += speed;
+            if (!collided)
+                x += speed;
         }
 
         animCounter++;
