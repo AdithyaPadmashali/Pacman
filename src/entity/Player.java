@@ -13,13 +13,11 @@ public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
 
-    boolean collided;
     boolean openMouth;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.keyH = keyH;
-        this.collided = false;
         this.openMouth = true;
         this.setDefaultValues();
         this.getPlayerImage();
@@ -27,8 +25,6 @@ public class Player extends Entity {
 
     public void getPlayerImage() {
         try {
-            // right = ImageIO.read(getClass().getResourceAsStream("/right.png"));
-            // left = ImageIO.read(getClass().getResourceAsStream("/left.png"));
             right = ImageIO.read(getClass().getResourceAsStream("/pacman-right.png"));
             left = ImageIO.read(getClass().getResourceAsStream("/pacman-left.png"));
             up = ImageIO.read(getClass().getResourceAsStream("/topfromleft.png"));
@@ -53,23 +49,19 @@ public class Player extends Entity {
     public void update() {
         if (keyH.upPressed) {
             direction = "up";
-            if (!collided)
-                y -= speed;
+            y -= speed;
         }
         if (keyH.downPressed) {
             direction = "down";
-            if (!collided)
-                y += speed;
+            y += speed;
         }
         if (keyH.leftPressed) {
             direction = "left";
-            if (!collided)
-                x -= speed;
+            x -= speed;
         }
         if (keyH.rightPressed) {
             direction = "right";
-            if (!collided)
-                x += speed;
+            x += speed;
         }
 
         animCounter++;
@@ -78,6 +70,14 @@ public class Player extends Entity {
             animCounter = 0;
         }
 
+        // System.out.println(
+        // "Player on tile: " + (int) (this.x / (16 * gp.tileSize)) + " " + (int)
+        // (this.y / (16 * gp.tileSize)));
+        // System.out.println("Player on tile: " + this.x / (gp.tileSize) + " " + this.y
+        // / (gp.tileSize));
+
+        // System.out.println("Next valid tile = " + this.nextValidX + " " +
+        // this.nextValidY);
     }
 
     public void draw(Graphics2D g2) {

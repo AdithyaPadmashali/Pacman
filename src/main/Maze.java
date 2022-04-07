@@ -10,9 +10,9 @@ import javax.imageio.ImageIO;
 
 public class Maze {
 
-    final int W = 1;
-    final int F = 2;
-    final int E = 3;
+    // public final int W = 1;
+    // public final int F = 2;
+    // public final int E = 3;
 
     GamePanel gp;
     int x;
@@ -21,93 +21,14 @@ public class Maze {
 
     public BufferedImage wall;
 
-    // private int test[][] = { { 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1 }, { 0, 0, 0, 0,
-    // 0 }, { 1, 1, 1, 1, 1 } };
-
-    // private int board[][] = {
-    // { W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W,
-    // W, W, W },
-    // { W, F, F, F, F, F, F, F, F, F, F, F, F, W, W, F, F, F, F, F, F, F, F, F, F,
-    // F, F, W },
-    // { W, F, W, W, W, W, F, W, W, W, W, W, F, W, W, F, W, W, W, W, W, F, W, W, W,
-    // W, F, W },
-    // { W, F, W, W, W, W, F, W, W, W, W, W, F, W, W, F, W, W, W, W, W, F, W, W, W,
-    // W, F, W },
-    // { W, F, W, W, W, W, F, W, W, W, W, W, F, W, W, F, W, W, W, W, W, F, W, W, W,
-    // W, F, W },
-    // { W, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,
-    // F, F, W },
-    // { W, F, W, W, W, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, W, W,
-    // W, F, W },
-    // { W, F, W, W, W, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, W, W,
-    // W, F, W },
-    // { W, F, F, F, F, F, F, W, W, F, F, F, F, W, W, F, F, F, F, W, W, F, F, F, F,
-    // F, F, W },
-    // { W, W, W, W, W, W, F, W, W, W, W, W, F, W, W, F, W, W, W, W, W, F, W, W, W,
-    // W, W, W },
-    // { E, E, E, E, E, W, F, W, W, W, W, W, F, W, W, F, W, W, W, W, W, F, W, E, E,
-    // E, E, E },
-    // { E, E, E, E, E, W, F, W, W, F, F, F, F, F, F, F, F, F, F, W, W, F, W, E, E,
-    // E, E, E },
-    // { E, E, E, E, E, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, E, E,
-    // E, E, E },
-    // { W, W, W, W, W, W, F, W, W, F, W, E, E, E, E, E, E, W, F, W, W, F, W, W, W,
-    // W, W, W },
-    // { F, F, F, F, F, F, F, F, F, F, W, E, E, E, E, E, E, W, F, F, F, F, F, F, F,
-    // F, F, F },
-    // { W, W, W, W, W, W, F, W, W, F, W, E, E, E, E, E, E, W, F, W, W, F, W, W, W,
-    // W, W, W },
-    // { E, E, E, E, E, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, E, E,
-    // E, E, E },
-    // { E, E, E, E, E, W, F, W, W, F, F, F, F, F, F, F, F, F, F, W, W, F, W, E, E,
-    // E, E, E },
-    // { E, E, E, E, E, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, E, E,
-    // E, E, E },
-    // { W, W, W, W, W, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, W, W,
-    // W, W, W },
-    // { W, F, F, F, F, F, F, F, F, F, F, F, F, W, W, F, F, F, F, F, F, F, F, F, F,
-    // F, F, W },
-    // { W, F, W, W, W, W, F, W, W, W, W, W, F, W, W, F, W, W, W, W, W, F, W, W, W,
-    // W, F, W },
-    // { W, F, W, W, W, W, F, W, W, W, W, W, F, W, W, F, W, W, W, W, W, F, W, W, W,
-    // W, F, W },
-    // { W, F, F, F, W, W, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, W, W, F,
-    // F, F, W },
-    // { W, W, W, F, W, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, W, F,
-    // W, W, W },
-    // { W, W, W, F, W, W, F, W, W, F, W, W, W, W, W, W, W, W, F, W, W, F, W, W, F,
-    // W, W, W },
-    // { W, F, F, F, F, F, F, W, W, F, F, F, F, W, W, F, F, F, F, W, W, F, F, F, F,
-    // F, F, W },
-    // { W, F, W, W, W, W, W, W, W, W, W, W, F, W, W, F, W, W, W, W, W, W, W, W, W,
-    // W, F, W },
-    // { W, F, W, W, W, W, W, W, W, W, W, W, F, W, W, F, W, W, W, W, W, W, W, W, W,
-    // W, F, W },
-    // { W, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,
-    // F, F, W },
-    // { W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W,
-    // W, W, W }
-    // };
-
-    private int[][] board = { { W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W },
-            { W, F, F, F, F, F, F, F, F, F, F, F, F, F, F, W },
-            { W, F, W, W, W, W, F, W, W, F, W, W, W, W, F, W },
-            { W, F, W, W, W, W, F, W, W, F, W, W, W, W, F, W },
-            { W, F, F, F, F, F, F, W, W, F, F, F, F, F, F, W },
-            { W, W, W, F, W, W, W, W, W, W, W, W, F, W, W, W },
-            { W, F, F, F, F, F, F, W, W, F, F, F, F, F, F, W },
-            { F, F, W, W, W, W, F, W, W, F, W, W, W, W, F, F },
-            { W, F, W, W, W, W, F, W, W, F, W, W, W, W, F, W },
-            { W, F, F, F, F, F, F, W, W, F, F, F, F, F, F, W },
-            { W, F, W, W, W, W, F, F, F, F, W, W, W, W, F, W },
-            { W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W }
-    };
+    public int[][] board = new Board().getBoard();
 
     public Maze(GamePanel gp, KeyHandler KeyH) {
         this.gp = gp;
         this.KeyH = KeyH;
         this.setDefaultValues();
         this.getMazeImages();
+        // System.out.println("from maze " + this.board[0][0]);
     }
 
     public void getMazeImages() {
@@ -124,8 +45,6 @@ public class Maze {
     }
 
     public void update() {
-        // System.out.println("detected pacman at x=" + pacman.x + " and y=" +
-        // pacman.y);
     }
 
     public void draw(Graphics2D g2) {
