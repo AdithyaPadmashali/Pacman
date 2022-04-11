@@ -21,8 +21,8 @@ public class GamePanel extends JPanel implements Runnable {
     final int maxScreenlCol = 16;
     final int maxScreenlRow = 12;
 
-    final int screenWidth = tileSize * maxScreenlCol; // 768
-    final int screenHeight = tileSize * maxScreenlRow; // 576
+    public final int screenWidth = tileSize * maxScreenlCol; // 768
+    public final int screenHeight = tileSize * maxScreenlRow; // 576
 
     // GAME STATES
     public boolean paused;
@@ -43,6 +43,8 @@ public class GamePanel extends JPanel implements Runnable {
     NPCPurple NPCPurple = new NPCPurple(this, keyH, player);
     NPCWhite NPCWhite = new NPCWhite(this, keyH, player);
     UI ui = new UI(this, keyH);
+
+    public CollisionChecker cChecker = new CollisionChecker(this);
 
     public GamePanel() {
         this.paused = false;
@@ -91,7 +93,6 @@ public class GamePanel extends JPanel implements Runnable {
             NPCBlue.update();
             NPCPurple.update();
             NPCWhite.update();
-
         }
     }
 
