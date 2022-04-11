@@ -8,8 +8,6 @@ public class Entity {
     public int x, y;
     public int speed;
 
-    public boolean collidedWithWall;
-
     public BufferedImage image;
     public BufferedImage right, left, down, up;
     public BufferedImage right1, left1, down1, up1;

@@ -8,33 +8,28 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 
+
 public class Player extends Entity {
 
     GamePanel gp;
     KeyHandler keyH;
-
-    BufferedImage test;
+    Maze m;
 
     boolean openMouth;
-    // public boolean collidedWithWall;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.keyH = keyH;
+      
         this.openMouth = true;
-        this.collidedWithWall = false;
         this.setDefaultValues();
         this.getPlayerImage();
-        try {
-
-            test = ImageIO.read(getClass().getResourceAsStream("/test.png"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public void getPlayerImage() {
         try {
+            // right = ImageIO.read(getClass().getResourceAsStream("/right.png"));
+            // left = ImageIO.read(getClass().getResourceAsStream("/left.png"));
             right = ImageIO.read(getClass().getResourceAsStream("/pacman-right.png"));
             left = ImageIO.read(getClass().getResourceAsStream("/pacman-left.png"));
             up = ImageIO.read(getClass().getResourceAsStream("/topfromleft.png"));
@@ -50,65 +45,43 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-        x = 1 * gp.tileSize;
-        y = 1 * gp.tileSize;
-        speed = 4;
+        x = gp.tileSize;
+        y = gp.tileSize;
+        speed = 48;
         direction = "right";
+
     }
 
     public void update() {
-        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
 
-            if (keyH.upPressed) {
-                direction = "up";
-                // y -= speed;
-            }
-            if (keyH.downPressed) {
-                direction = "down";
-                // y += speed;
-            }
-            if (keyH.leftPressed) {
-                direction = "left";
-                // x -= speed;
-            }
-            if (keyH.rightPressed) {
-                direction = "right";
-                // x += speed;
-            }
-
-            this.collidedWithWall = false;
-            gp.cChecker.checkWall2(this);
-            int check;
-            if (!collidedWithWall) {
-                switch (direction) {
-                    case "up":
-                        check = y - speed;
-                        if (check > 0)
-                            y -= speed;
-                        break;
-                    case "down":
-                        check = y + speed;
-                        if (check < gp.screenHeight)
-                            y += speed;
-                        break;
-                    case "left":
-                        check = x - speed;
-                        if (check > 0)
-                            x -= speed;
-                        break;
-                    case "right":
-                        check = x + speed;
-                        if (check < gp.screenWidth - 48)
-                            x += speed;
-                        break;
-                }
-            }
+        int row = x/gp.tileSize ;
+        int column = y/gp.tileSize  ;
+      
+       
+        if (keyH.upPressed ) {
+            
+            direction = "up";
+            y -= speed;
         }
+        if (keyH.downPressed) {
+            direction = "down";
+            y += speed;
+        }
+        if (keyH.leftPressed) {
+            direction = "left";
+            x -= speed;
+        }
+        if (keyH.rightPressed) {
+            direction = "right";
+            x += speed;
+        }
+      
+     
         animCounter++;
         if (animCounter == 15) {
             this.openMouth = !this.openMouth;
             animCounter = 0;
-        }
+        } 
 
     }
 

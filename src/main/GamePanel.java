@@ -8,21 +8,22 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import entity.NPCGreen;
+import entity.Maze;
 import entity.NPCBlue;
 import entity.NPCPurple;
 import entity.NPCWhite;
 import entity.Player;
 
 public class GamePanel extends JPanel implements Runnable {
-    final int originalTileSize = 16; // 16pixels sqare
+    final int originalTileSize = 16 ;// 16pixels sqare
     final int scale = 3;
 
     public final int tileSize = originalTileSize * scale; // Actual tile size
     final int maxScreenlCol = 16;
     final int maxScreenlRow = 12;
 
-    public final int screenWidth = tileSize * maxScreenlCol; // 768
-    public final int screenHeight = tileSize * maxScreenlRow; // 576
+    final int screenWidth = tileSize * maxScreenlCol; // 768
+    final int screenHeight = tileSize * maxScreenlRow; // 576
 
     // GAME STATES
     public boolean paused;
@@ -32,19 +33,19 @@ public class GamePanel extends JPanel implements Runnable {
     public int difficulty;
 
     // FPS
-    final int FPS = 60;
+    final int FPS = 10;
 
     Thread gameThread;
     KeyHandler keyH = new KeyHandler(this);
-    Maze maze = new Maze(this, keyH);
     Player player = new Player(this, keyH);
-    NPCGreen NPCGreen = new NPCGreen(this, keyH, player);
-    NPCBlue NPCBlue = new NPCBlue(this, keyH, player);
-    NPCPurple NPCPurple = new NPCPurple(this, keyH, player);
-    NPCWhite NPCWhite = new NPCWhite(this, keyH, player);
+    Maze maze = new Maze(this, keyH);
+    NPCGreen NPCGreen = new NPCGreen(this, keyH, player,maze);
+   
+    NPCPurple NPCPurple = new NPCPurple(this, keyH, player,maze);
+    NPCWhite NPCWhite = new NPCWhite(this, keyH, player,maze);
+    
     UI ui = new UI(this, keyH);
-
-    public CollisionChecker cChecker = new CollisionChecker(this);
+    NPCBlue NPCBlue = new NPCBlue(this, keyH, player,  maze);
 
     public GamePanel() {
         this.paused = false;
@@ -77,7 +78,7 @@ public class GamePanel extends JPanel implements Runnable {
             lastTime = currentTime;
 
             if (delta >= 1) {
-                update();
+                //update();
                 repaint();
                 delta--;
             }
@@ -87,12 +88,15 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
         if (!this.paused) {
-            maze.update();
             player.update();
             NPCGreen.update();
+         
             NPCBlue.update();
+        
             NPCPurple.update();
             NPCWhite.update();
+            
+            maze.update();
         }
     }
 
@@ -116,6 +120,8 @@ public class GamePanel extends JPanel implements Runnable {
             NPCPurple.draw(g2);
             NPCWhite.draw(g2);
             player.draw(g2);
+            update();
+            
         }
         g2.dispose();
     }

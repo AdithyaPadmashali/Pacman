@@ -1,5 +1,7 @@
-package main;
+ package main;
 
+  
+   
 import javax.swing.JFrame;
 
 public class Main {
@@ -7,7 +9,7 @@ public class Main {
 
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
+        window.setResizable(true);
         window.setTitle("Pacman?");
 
         GamePanel gamePanel = new GamePanel();
@@ -20,3 +22,4 @@ public class Main {
         gamePanel.startGameThread();
     }
 }
+
