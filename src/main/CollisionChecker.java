@@ -5,7 +5,9 @@ import entity.Entity;
 public class CollisionChecker {
 
     GamePanel gp;
-    int[][] board = new Board().getBoard();
+    Board board1=new Board();
+    int[][] board = board1.getBoard();
+    int[][] collectibles = board1.collectibles;
 
     public CollisionChecker(GamePanel gp) {
         this.gp = gp;
@@ -78,4 +80,11 @@ public class CollisionChecker {
             }
         }
     }
+
+    public void checkCollectible(){
+        if(collectibles[gp.player.y/48][gp.player.x/48]==3){
+            board1.setCollectibles(gp.player.y/48, gp.player.x/48, 2);
+        }
+    }
+
 }

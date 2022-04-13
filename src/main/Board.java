@@ -2,20 +2,34 @@ package main;
 
 public class Board {
 
-    public final int W = 1;
-    public final int F = 2;
-    public final int E = 3;
+    public int W = 1;
+    public int F = 2;
+    public int E = 3;
     public int[][] board = { { W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W },
-            { W, F, F, F, F, F, F, F, F, F, F, F, F, F, F, W },
+            { W, F, F, E, F, F, E, F, F, E, F, F, E, F, F, W },
             { W, F, W, W, W, W, F, W, W, F, W, W, W, W, F, W },
-            { W, F, W, W, W, W, F, W, W, F, W, W, W, W, F, W },
-            { W, F, F, F, F, F, F, W, W, F, F, F, F, F, F, W },
+            { W, E, W, W, W, W, F, W, W, F, W, W, W, W, E, W },
+            { W, F, F, E, F, E, F, W, W, F, E, F, E, F, F, W },
             { W, W, W, F, W, W, W, W, W, W, W, W, F, W, W, W },
-            { W, F, F, F, F, F, F, W, W, F, F, F, F, F, F, W },
-            { F, F, W, W, W, W, F, W, W, F, W, W, W, W, F, F },
+            { W, E, F, E, F, E, F, W, W, F, E, F, E, F, E, W },
+            { F, F, W, W, W, W, E, W, W, E, W, W, W, W, F, F },
             { W, F, W, W, W, W, F, W, W, F, W, W, W, W, F, W },
-            { W, F, F, F, F, F, F, W, W, F, F, F, F, F, F, W },
-            { W, F, W, W, W, W, F, F, F, F, W, W, W, W, F, W },
+            { W, F, F, E, F, E, F, W, W, F, E, F, E, F, F, W },
+            { W, F, W, W, W, W, F, E, E, F, W, W, W, W, F, W },
+            { W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W }
+    };
+
+    public int[][] collectibles = { { W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W },
+            { W, F, F, E, F, F, E, F, F, E, F, F, E, F, F, W },
+            { W, F, W, W, W, W, F, W, W, F, W, W, W, W, F, W },
+            { W, E, W, W, W, W, F, W, W, F, W, W, W, W, E, W },
+            { W, F, F, E, F, E, F, W, W, F, E, F, E, F, F, W },
+            { W, W, W, F, W, W, W, W, W, W, W, W, F, W, W, W },
+            { W, E, F, E, F, E, F, W, W, F, E, F, E, F, E, W },
+            { F, F, W, W, W, W, E, W, W, E, W, W, W, W, F, F },
+            { W, F, W, W, W, W, F, W, W, F, W, W, W, W, F, W },
+            { W, F, F, E, F, E, F, W, W, F, E, F, E, F, F, W },
+            { W, F, W, W, W, W, F, E, E, F, W, W, W, W, F, W },
             { W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W }
     };
 
@@ -27,4 +41,14 @@ public class Board {
         // System.out.println("from board" + this.board);
         return this.board;
     }
+
+    public int[][] getCollectibles() {
+        // System.out.println("from board" + this.board);
+        return this.collectibles;
+    }
+
+    public void setCollectibles(int i, int j, int n){
+        this.collectibles[i][j]=n;
+    }
+
 }
