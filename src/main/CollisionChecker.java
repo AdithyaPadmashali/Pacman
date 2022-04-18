@@ -78,4 +78,23 @@ public class CollisionChecker {
             }
         }
     }
+
+    public void checkEntityCollision(Entity e1, Entity e2) {
+
+        // ||
+        // ((e2.x + 16) >= e1.x && ((e1.x + gp.tileSize) - (e2.x + gp.tileSize) <= 16)
+        // && e2.y == e1.y) ||
+        // ((e1.y + 16) >= e2.y && ((e2.y + gp.tileSize) - (e1.y + gp.tileSize) <= 16)
+        // && e1.x == e2.x) ||
+        // ((e2.y + 16) >= e1.y && ((e1.y + gp.tileSize) - (e2.y + gp.tileSize) <= 16)
+        // && e1.x == e2.x)
+        // // System.out.println(e1.x + " " + e2.x);
+        if (((e1.x + 16) >= e2.x && ((e2.x + gp.tileSize) - (e1.x + gp.tileSize) <= 16)
+                && ((e1.x + gp.tileSize) - (e2.x + gp.tileSize) <= 16) && e1.y == e2.y)
+                || ((e1.y + 16) >= e2.y && ((e2.y + gp.tileSize) - (e1.y + gp.tileSize) <= 16)
+                        && ((e1.y + gp.tileSize) - (e2.y + gp.tileSize) <= 16) && e1.x == e2.x)) {
+            e1.collidedWithEntity = true;
+            e2.collidedWithEntity = true;
+        }
+    }
 }

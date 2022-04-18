@@ -23,6 +23,7 @@ public class Player extends Entity {
         this.keyH = keyH;
         this.openMouth = true;
         this.collidedWithWall = false;
+        this.collidedWithEntity = false;
         this.setDefaultValues();
         this.getPlayerImage();
         try {
@@ -77,7 +78,11 @@ public class Player extends Entity {
             }
 
             this.collidedWithWall = false;
+            // this.collidedWithEntity = false;
             gp.cChecker.checkWall2(this);
+            // gp.cChecker.checkEntityCollision(this, gp.NPCBlue);
+            // System.out.println(collidedWithEntity);
+
             int check;
             if (!collidedWithWall) {
                 switch (direction) {

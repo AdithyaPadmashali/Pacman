@@ -9,6 +9,7 @@ public class Entity {
     public int speed;
 
     public boolean collidedWithWall;
+    public boolean collidedWithEntity;
 
     public BufferedImage image;
     public BufferedImage right, left, down, up;

@@ -29,6 +29,8 @@ public class GamePanel extends JPanel implements Runnable {
     public boolean atTitleScreen;
     public boolean playing;
     public boolean atSelectDifficulty;
+
+    // 0, 1 and 2 -> easy, medium and hard respectively.
     public int difficulty;
 
     // FPS
@@ -37,11 +39,11 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
     KeyHandler keyH = new KeyHandler(this);
     Maze maze = new Maze(this, keyH);
-    Player player = new Player(this, keyH);
-    NPCGreen NPCGreen = new NPCGreen(this, keyH, player);
-    NPCBlue NPCBlue = new NPCBlue(this, keyH, player);
-    NPCPurple NPCPurple = new NPCPurple(this, keyH, player);
-    NPCWhite NPCWhite = new NPCWhite(this, keyH, player);
+    public Player player = new Player(this, keyH);
+    public NPCGreen NPCGreen = new NPCGreen(this, keyH, player);
+    public NPCBlue NPCBlue = new NPCBlue(this, keyH, player);
+    public NPCPurple NPCPurple = new NPCPurple(this, keyH, player);
+    public NPCWhite NPCWhite = new NPCWhite(this, keyH, player);
     UI ui = new UI(this, keyH);
 
     public CollisionChecker cChecker = new CollisionChecker(this);
@@ -94,6 +96,7 @@ public class GamePanel extends JPanel implements Runnable {
             NPCPurple.update();
             NPCWhite.update();
         }
+        // System.out.println(this.playing);
     }
 
     // This one is a Standard method
