@@ -5,7 +5,7 @@ import entity.Entity;
 public class CollisionChecker {
 
     GamePanel gp;
-    Board board1=new Board();
+    Board board1 = new Board();
     int[][] board = board1.getBoard();
     int[][] collectibles = board1.collectibles;
 
@@ -81,10 +81,13 @@ public class CollisionChecker {
         }
     }
 
-    public void checkCollectible(){
-        if(collectibles[gp.player.y/48][gp.player.x/48]==3){
-            board1.setCollectibles(gp.player.y/48, gp.player.x/48, 2);
+    public void checkCollectible(Maze maze) {
+        if (maze.collectibles.getCollectibles()[gp.player.y / 48][gp.player.x / 48] == 3) {
+            maze.collectibles.setCollectibles(gp.player.y / 48, gp.player.x / 48, 2);
+            // System.out.println("coin");
+            // System.out.println(maze.collectibles.getCollectibles()[gp.player.y /
+            // 48][gp.player.x / 48]);
         }
-    }
 
+    }
 }

@@ -19,10 +19,13 @@ public class Maze {
     KeyHandler KeyH;
 
     public BufferedImage wall;
+    public BufferedImage test;
     public BufferedImage coin;
 
+    public Board collectibles = new Board();
+
     public int[][] board = new Board().getBoard();
-    public int[][] collectibles =new Board().getCollectibles();
+    // public int[][] collectibles = new Board().getCollectibles();
 
     public Maze(GamePanel gp, KeyHandler KeyH) {
         this.gp = gp;
@@ -36,6 +39,7 @@ public class Maze {
         try {
             wall = ImageIO.read(getClass().getResourceAsStream("/wall.png"));
             coin = ImageIO.read(getClass().getResourceAsStream("/coin.png"));
+            test = ImageIO.read(getClass().getResourceAsStream("/test.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,19 +51,25 @@ public class Maze {
     }
 
     public void update() {
+        gp.cChecker.checkCollectible(this);
+        // System.out.println("test");
     }
 
     public void draw(Graphics2D g2) {
 
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
-                
+
                 if (board[i][j] == 1) {
                     g2.drawImage(wall, x, y, gp.tileSize, gp.tileSize, null);
                 }
-                if (collectibles[i][j] == 3){
+                if (collectibles.getCollectibles()[i][j] == 3) {
                     g2.drawImage(coin, x, y, gp.tileSize, gp.tileSize, null);
                 }
+
+                // else {
+                // g2.drawImage(test, x, y, gp.tileSize, gp.tileSize, null);
+                // }
 
                 this.x += gp.tileSize;
             }
@@ -67,5 +77,7 @@ public class Maze {
             this.y += gp.tileSize;
         }
         this.setDefaultValues();
+        System.out.println(collectibles.getCollectibles()[1][3]);
+
     }
 }

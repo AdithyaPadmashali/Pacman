@@ -26,7 +26,6 @@ public class Player extends Entity {
         this.setDefaultValues();
         this.getPlayerImage();
         try {
-
             test = ImageIO.read(getClass().getResourceAsStream("/test.png"));
         } catch (Exception e) {
             e.printStackTrace();

@@ -47,8 +47,17 @@ public class Board {
         return this.collectibles;
     }
 
-    public void setCollectibles(int i, int j, int n){
-        this.collectibles[i][j]=n;
+    // public int getCollectibles(int i, int j) {
+    // // System.out.println("from board" + this.board);
+    // return this.collectibles[i][j];
+    // }
+
+    // public void update() {
+
+    // }
+
+    public void setCollectibles(int i, int j, int n) {
+        this.collectibles[i][j] = n;
     }
 
 }
