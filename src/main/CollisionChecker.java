@@ -1,6 +1,7 @@
 package main;
 
 import entity.Entity;
+import entity.Player;
 
 public class CollisionChecker {
 
@@ -8,7 +9,6 @@ public class CollisionChecker {
     Board board1 = new Board();
     int[][] board = board1.getBoard();
     int[][] collectibles = board1.collectibles;
-
     public CollisionChecker(GamePanel gp) {
         this.gp = gp;
     }
@@ -84,6 +84,7 @@ public class CollisionChecker {
     public void checkCollectible(Maze maze) {
         if (maze.collectibles.getCollectibles()[gp.player.y / 48][gp.player.x / 48] == 3) {
             maze.collectibles.setCollectibles(gp.player.y / 48, gp.player.x / 48, 2);
+            gp.score+=10;
             // System.out.println("coin");
             // System.out.println(maze.collectibles.getCollectibles()[gp.player.y /
             // 48][gp.player.x / 48]);

@@ -20,9 +20,11 @@ public class GamePanel extends JPanel implements Runnable {
     public final int tileSize = originalTileSize * scale; // Actual tile size
     final int maxScreenlCol = 16;
     final int maxScreenlRow = 12;
-
+    
     public final int screenWidth = tileSize * maxScreenlCol; // 768
     public final int screenHeight = tileSize * maxScreenlRow; // 576
+
+    public int score=0;
 
     // GAME STATES
     public boolean paused;
@@ -116,6 +118,7 @@ public class GamePanel extends JPanel implements Runnable {
             NPCPurple.draw(g2);
             NPCWhite.draw(g2);
             player.draw(g2);
+            player.showScore(g2);
         }
         g2.dispose();
     }
