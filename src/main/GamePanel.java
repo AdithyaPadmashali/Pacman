@@ -1,5 +1,7 @@
 package main;
 
+import java.io.*;
+
 import javax.swing.JPanel;
 
 import java.awt.Graphics;
@@ -20,17 +22,24 @@ public class GamePanel extends JPanel implements Runnable {
     public final int tileSize = originalTileSize * scale; // Actual tile size
     final int maxScreenlCol = 16;
     final int maxScreenlRow = 12;
-    
+
     public final int screenWidth = tileSize * maxScreenlCol; // 768
     public final int screenHeight = tileSize * maxScreenlRow; // 576
 
-    public int score=0;
+    public int score = 0;
 
     // GAME STATES
     public boolean paused;
     public boolean atTitleScreen;
     public boolean playing;
     public boolean atSelectDifficulty;
+    public boolean gameOver;
+    public boolean atCongrats;
+    public boolean toLoad;
+    public boolean toSave;
+    public boolean toLeaderboard;
+
+    // 0, 1 and 2 -> easy, medium and hard respectively.
     public int difficulty;
 
     // FPS
@@ -40,12 +49,12 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHandler keyH = new KeyHandler(this);
     Maze maze = new Maze(this, keyH);
     public Player player = new Player(this, keyH);
-    NPCGreen NPCGreen = new NPCGreen(this, keyH, player);
-    NPCBlue NPCBlue = new NPCBlue(this, keyH, player);
-    NPCPurple NPCPurple = new NPCPurple(this, keyH, player);
-    NPCWhite NPCWhite = new NPCWhite(this, keyH, player);
+    public NPCGreen NPCGreen = new NPCGreen(this, keyH, player);
+    public NPCBlue NPCBlue = new NPCBlue(this, keyH, player);
+    public NPCPurple NPCPurple = new NPCPurple(this, keyH, player);
+    public NPCWhite NPCWhite = new NPCWhite(this, keyH, player);
     UI ui = new UI(this, keyH);
-    Leaderboard leaderboard=new Leaderboard();
+    Leaderboard leaderboard = new Leaderboard();
 
     public CollisionChecker cChecker = new CollisionChecker(this);
 
@@ -53,7 +62,11 @@ public class GamePanel extends JPanel implements Runnable {
         this.paused = false;
         this.atSelectDifficulty = false;
         this.atTitleScreen = true;
+        this.toSave = false;
         this.playing = false;
+        this.atCongrats = false;
+        this.toLoad = false;
+        this.toLeaderboard=false;
         this.difficulty = 0;
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
@@ -90,14 +103,15 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
         if (!this.paused) {
-            maze.update();
             player.update();
             NPCGreen.update();
             NPCBlue.update();
             NPCPurple.update();
             NPCWhite.update();
-            //leaderboard.showRecords();
+            maze.update();
+            // leaderboard.showRecords();
         }
+
     }
 
     // This one is a Standard method
@@ -111,18 +125,149 @@ public class GamePanel extends JPanel implements Runnable {
             ui.draw(g2);
         } else if (this.atTitleScreen) {
             ui.draw(g2);
+            if (this.toSave)
+                this.saveGame();
+            player.setDefaultValues();
+            NPCBlue.setDefaultValues();
+            NPCGreen.setDefaultValues();
+            NPCPurple.setDefaultValues();
+            NPCWhite.setDefaultValues();
+            if (!this.toSave)
+                maze.reset();
+            player.score = 0;
         } else if (this.atSelectDifficulty) {
             ui.draw(g2);
         } else if (this.playing) {
+            this.toSave = true;
+            if (this.toLoad) {
+                try {
+                    loadGame();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
             maze.draw(g2);
             NPCGreen.draw(g2);
             NPCBlue.draw(g2);
             NPCPurple.draw(g2);
+            player.showRemaining(g2);
             NPCWhite.draw(g2);
             player.draw(g2);
-            player.showScore(g2);
+            ui.draw(g2);
+
+        } else if (this.gameOver) {
+            ui.draw(g2);
+            player.setDefaultValues();
+            NPCBlue.setDefaultValues();
+            NPCGreen.setDefaultValues();
+            NPCPurple.setDefaultValues();
+            NPCWhite.setDefaultValues();
+            maze.reset();
+            this.toSave = false;
+            this.toLoad = false;
+            player.score = 0;
+        } else if (this.atCongrats) {
+            ui.draw(g2);
+            player.setDefaultValues();
+            NPCBlue.setDefaultValues();
+            NPCGreen.setDefaultValues();
+            NPCPurple.setDefaultValues();
+            NPCWhite.setDefaultValues();
+            maze.reset();
+            this.toSave = false;
+            this.toLoad = false;
+            player.score = 0;
+            leaderboard.pushRecords(this);
+        }
+        else if(this.toLeaderboard){
+            leaderboard.showRecords(g2);
         }
         g2.dispose();
+    }
+
+    public void saveGame() {
+        FileWriter filewrite;
+        try {
+            filewrite = new FileWriter("savedata.txt");
+
+            // Initialing BufferedWriter
+            BufferedWriter bufferwrite = new BufferedWriter(filewrite);
+
+            // save player details
+            String text = new String(player.x + " " + player.y);
+            text += " " + player.direction;
+            text += " " + player.score;
+
+            // save maze details
+            // have to save this.maze.collectibles
+
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < maze.collectibles.getCollectibles().length; i++)// for each row
+            {
+                for (int j = 0; j < maze.collectibles.getCollectibles()[0].length; j++)// for each column
+                {
+                    builder.append(maze.collectibles.getCollectibles()[i][j] + "");// append to the output string
+                    if (j < maze.collectibles.getCollectibles()[0].length - 1)// if this is not the last row element
+                        builder.append(",");// then add comma (if you don't like commas you can use spaces)
+                }
+                builder.append("\n");// append new line at the end of the row
+            }
+            BufferedWriter writer = new BufferedWriter(new FileWriter("collectibleState.txt"));
+            writer.write(builder.toString());// save the string representation of the board
+            writer.close();
+
+            // Use of write() method to write the value in 'ABC' file
+            bufferwrite.write(text);
+
+            // Closing BufferWriter to end operation
+            bufferwrite.close();
+            System.out.println("Saved successfully");
+        } catch (IOException excpt) {
+            excpt.printStackTrace();
+        }
+        this.toSave = false;
+    }
+
+    public void loadGame() throws FileNotFoundException, IOException {
+        File fi = new File("savedata.txt");
+        BufferedReader br = new BufferedReader(new FileReader(fi));
+        String st;
+        String readText = new String();
+        try {
+            while ((st = br.readLine()) != null) {
+                readText += st;
+            }
+            String[] values = readText.split(" ");
+            player.x = Integer.parseInt(values[0]);
+            player.y = Integer.parseInt(values[1]);
+            player.direction = values[2];
+            player.score = Integer.parseInt(values[3]);
+
+            // Load the previously mapped collectibles (2d array)
+            String savedCollectibles = "collectibleState.txt";
+            int[][] loadedCollectibles = new int[this.maxScreenlRow][this.maxScreenlCol];
+            BufferedReader reader = new BufferedReader(new FileReader(savedCollectibles));
+            String line = "";
+            int row = 0;
+            while ((line = reader.readLine()) != null) {
+                String[] cols = line.split(",");
+                int col = 0;
+                for (String c : cols) {
+                    loadedCollectibles[row][col] = Integer.parseInt(c);
+                    col++;
+                }
+                row++;
+            }
+            reader.close();
+
+            this.maze.collectibles.setCollectibles(loadedCollectibles);
+            System.out.println("loaded the map");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        br.close();
+        this.toLoad = false;
     }
 
     public void startGameThread() {

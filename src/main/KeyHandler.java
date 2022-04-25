@@ -87,8 +87,19 @@ public class KeyHandler implements KeyListener {
             gp.paused = !gp.paused;
         }
 
-        // for exiting from the title screen
+        //leaderboard screen
         if (code == KeyEvent.VK_ENTER && gp.ui.optionNumber == 2) {
+            gp.atCongrats=false;
+            gp.playing=false;
+            gp.atSelectDifficulty=false;
+            gp.paused=false;
+            gp.gameOver=false;
+            gp.atTitleScreen=false;
+            gp.toLeaderboard=true;
+        }
+
+        // for exiting from the title screen
+        if (code == KeyEvent.VK_ENTER && gp.ui.optionNumber == 3) {
             System.exit(0);
         }
 
@@ -110,15 +121,29 @@ public class KeyHandler implements KeyListener {
 
         // for starting the loaded game from the title screen
         if (code == KeyEvent.VK_ENTER && gp.ui.optionNumber == 1) {
-            // yet to implement
+            gp.toLoad = true;
+            gp.playing = true;
+            gp.paused = false;
+            gp.atCongrats=false;
+            gp.atTitleScreen = false;
         }
 
         // press esc to return to title screen while playing the game or while paused
         if (code == KeyEvent.VK_ESCAPE) {
             gp.playing = false;
             gp.paused = false;
+            gp.gameOver = false;
             gp.atTitleScreen = true;
+            gp.toSave = true;
         }
 
+        if (gp.player.score == 240) {
+            gp.playing = false;
+            gp.atCongrats = true;
+            gp.gameOver = false;
+            gp.paused = false;
+            gp.atTitleScreen = false;
+        }
     }
+
 }

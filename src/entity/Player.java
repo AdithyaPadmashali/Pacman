@@ -11,24 +11,35 @@ import main.GamePanel;
 import java.awt.Color;
 import java.awt.Font;
 
-
 public class Player extends Entity {
 
     GamePanel gp;
     KeyHandler keyH;
-    public int score=0;
+    // public int score=0;
     BufferedImage test;
+    BufferedImage life;
 
-    Font f1 = new Font("Arial",Font.BOLD,18);
+    Font f1 = new Font("Arial", Font.BOLD, 18);
 
     boolean openMouth;
+
+    public int score;
     // public boolean collidedWithWall;
+
+    int rect;
+    boolean moved;
+    boolean a_star_moved;
+    int prev_player_position_x;
+    int prev_player_position_y;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
+        this.score = 0;
         this.keyH = keyH;
+        this.rect = 3;
         this.openMouth = true;
         this.collidedWithWall = false;
+        this.collidedWithEntity = false;
         this.setDefaultValues();
         this.getPlayerImage();
         try {
@@ -48,6 +59,7 @@ public class Player extends Entity {
             left1 = ImageIO.read(getClass().getResourceAsStream("/pacman-left1.png"));
             up1 = ImageIO.read(getClass().getResourceAsStream("/topfromleft1.png"));
             down1 = ImageIO.read(getClass().getResourceAsStream("/downfromleft1.png"));
+            life = ImageIO.read(getClass().getResourceAsStream("/life.png"));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -82,7 +94,11 @@ public class Player extends Entity {
             }
 
             this.collidedWithWall = false;
+            // this.collidedWithEntity = false;
             gp.cChecker.checkWall2(this);
+            // gp.cChecker.checkEntityCollision(this, gp.NPCBlue);
+            // System.out.println(collidedWithEntity);
+
             int check;
             if (!collidedWithWall) {
                 switch (direction) {
@@ -119,7 +135,7 @@ public class Player extends Entity {
 
     public void draw(Graphics2D g2) {
 
-        BufferedImage image = null;
+        // BufferedImage image = null;
 
         switch (direction) {
             case "right":
@@ -161,7 +177,31 @@ public class Player extends Entity {
         String s=Integer.toString(gp.score);
         g2.drawString("Score : ", 24, 24);
         g2.drawString(s, 96, 24);
-        
     }
+        
+    public void showRemaining(Graphics2D g2) {
+        // System.out.println("Show Remaining called " + rect);
+        BufferedImage image = life;
+        if (rect >= 1) {
+            g2.drawImage(image, gp.tileSize * 1, gp.tileSize * 11, gp.tileSize, gp.tileSize, null);
+            // System.out.println(" 1 from player");
+        }
+        if (rect >= 2) {
+            g2.drawImage(image, gp.tileSize * 2, gp.tileSize * 11, gp.tileSize, gp.tileSize, null);
+            // System.out.println(" 2 from player");
+        }
+        if (rect >= 3) {
+            g2.drawImage(image, gp.tileSize * 3, gp.tileSize * 11, gp.tileSize, gp.tileSize, null);
+            // System.out.println(" 3 from player");
+        }
+    }
+
+    // public void showScore(Graphics2D g2) {
+    // g2.setFont(f1);
+    // g2.setColor(Color.WHITE);
+    // String s = Integer.toString(gp.score);
+    // g2.drawString("Score : ", 24, 24);
+    // g2.drawString(s, 96, 24);
+    // }
 
 }

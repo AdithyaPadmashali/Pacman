@@ -12,6 +12,8 @@ public class UI {
     int x;
     int y;
 
+    Font f1 = new Font("Arial", Font.BOLD, 18);
+
     // for title screen
     int numberOfTitleOptions;
     int optionNumber;
@@ -25,7 +27,7 @@ public class UI {
         this.y = 3 * gp.tileSize;
         this.gp = gp;
         this.optionNumber = 0;
-        this.numberOfTitleOptions = 3;
+        this.numberOfTitleOptions = 4;
         this.numberOfDifficulties = 3;
         this.difficulty = 0;
         this.keyH = keyH;
@@ -44,6 +46,12 @@ public class UI {
             this.displayTitleScreen(g2);
         } else if (gp.atSelectDifficulty) {
             this.displaySelectDifficulty(g2);
+        } else if (gp.gameOver) {
+            this.displayGameOver(g2);
+        } else if (gp.atCongrats) {
+            this.displayCongrats(g2);
+        } else if (gp.playing) {
+            this.showScore(g2);
         }
     }
 
@@ -83,14 +91,19 @@ public class UI {
             g2.drawString(">", x + 2 * gp.tileSize, y + gp.tileSize * 3);
         }
 
-        g2.drawString("Leaderboard", x + 3 * gp.tileSize, y + gp.tileSize * 4);
+        g2.drawString("Load Game", x + 3 * gp.tileSize, y + gp.tileSize * 4);
         if (optionNumber == 1) {
             g2.drawString(">", x + 2 * gp.tileSize, y + gp.tileSize * 4);
         }
 
-        g2.drawString("Exit", x + 3 * gp.tileSize, y + gp.tileSize * 5);
+        g2.drawString("Leaderboard", x + 3 * gp.tileSize, y + gp.tileSize * 5);
         if (optionNumber == 2) {
             g2.drawString(">", x + 2 * gp.tileSize, y + gp.tileSize * 5);
+        }
+
+        g2.drawString("Exit", x + 3 * gp.tileSize, y + gp.tileSize * 6);
+        if (optionNumber == 3) {
+            g2.drawString(">", x + 2 * gp.tileSize, y + gp.tileSize * 6);
         }
     }
 
@@ -99,4 +112,21 @@ public class UI {
         g2.drawString("press p to resume", x + 2 * gp.tileSize, y + gp.tileSize);
     }
 
+    public void displayCongrats(Graphics2D g2) {
+        g2.drawString("CONGRATULATIONS", x + 2 * gp.tileSize, y);
+        g2.drawString("press ESC to quit to main menu", x + 0 * gp.tileSize, y + gp.tileSize);
+    }
+
+    public void displayGameOver(Graphics2D g2) {
+        g2.drawString("GAME OVER", x + 2 * gp.tileSize, y);
+        g2.drawString("press ESC to quit to main menu", x + 0 * gp.tileSize, y + gp.tileSize);
+    }
+
+    public void showScore(Graphics2D g2) {
+        g2.setFont(f1);
+        g2.setColor(Color.WHITE);
+        String s = Integer.toString(gp.player.score);
+        g2.drawString("Score : ", 24, 24);
+        g2.drawString(s, 96, 24);
+    }
 }

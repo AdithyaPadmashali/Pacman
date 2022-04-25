@@ -2,6 +2,7 @@ package main;
 
 public class Board {
 
+    public int initalCoins;
     public int W = 1;
     public int F = 2;
     public int E = 3;
@@ -34,30 +35,27 @@ public class Board {
     };
 
     public Board() {
-
+        this.initalCoins = 24;
     }
 
     public int[][] getBoard() {
-        // System.out.println("from board" + this.board);
         return this.board;
     }
 
     public int[][] getCollectibles() {
-        // System.out.println("from board" + this.board);
         return this.collectibles;
     }
 
-    // public int getCollectibles(int i, int j) {
-    // // System.out.println("from board" + this.board);
-    // return this.collectibles[i][j];
-    // }
-
-    // public void update() {
-
-    // }
-
     public void setCollectibles(int i, int j, int n) {
         this.collectibles[i][j] = n;
+    }
+
+    public void setCollectibles(int[][] c) {
+        for (int i = 0; i < c.length; i++) {
+            for (int j = 0; j < c[0].length; j++) {
+                this.collectibles[i][j] = c[i][j];
+            }
+        }
     }
 
 }
