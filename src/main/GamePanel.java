@@ -182,6 +182,8 @@ public class GamePanel extends JPanel implements Runnable {
             if (this.toPushtoLeaderboard == true) {
                 leaderboard.pushRecords(this);
                 this.toPushtoLeaderboard = false;
+                this.atCongrats=false;
+                this.atTitleScreen=true;
             }
         } else if (this.toLeaderboard) {
             leaderboard.showRecords(g2);

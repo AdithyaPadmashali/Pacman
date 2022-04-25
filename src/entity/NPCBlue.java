@@ -314,6 +314,7 @@ public class NPCBlue extends Entity {
             if (gp.player.rect <= 0) {
                 gp.playing = false;
                 gp.gameOver = true;
+                gp.player.rect=4;
             }
             this.collidedWithEntity = false;
             gp.player.setDefaultValues();

@@ -13,6 +13,7 @@ public class Leaderboard {
             Statement myStatement=myConnection.createStatement();
             ResultSet myResultSet=myStatement.executeQuery("select * from leaderboard");//table name
             int y=24;
+            int top=0;
             while(myResultSet.next()){
                 System.out.println("difficulty : "+myResultSet.getString("time"));
                 g2.drawString(myResultSet.getString("time"), 24, y);
