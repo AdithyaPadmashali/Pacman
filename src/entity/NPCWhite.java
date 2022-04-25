@@ -101,6 +101,7 @@ public class NPCWhite extends Entity {
                     break;
             }
         }
+
     }
 
     public void update() {
@@ -114,10 +115,13 @@ public class NPCWhite extends Entity {
         gp.cChecker.checkEntityCollision(gp.player, this);
 
         if (collidedWithEntity) {
-            gp.playing = false;
-            gp.gameOver = true;
-            this.setDefaultValues();
-
+            if (gp.player.rect <= 0) {
+                gp.playing = false;
+                gp.gameOver = true;
+            }
+            this.collidedWithEntity = false;
+            gp.player.setDefaultValues();
+            gp.player.rect -= 1;
         }
 
         if (gp.difficulty == 0) {

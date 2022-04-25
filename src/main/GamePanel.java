@@ -148,6 +148,7 @@ public class GamePanel extends JPanel implements Runnable {
             NPCGreen.draw(g2);
             NPCBlue.draw(g2);
             NPCPurple.draw(g2);
+            player.showRemaining(g2);
             NPCWhite.draw(g2);
             player.draw(g2);
             ui.draw(g2);

@@ -78,7 +78,7 @@ public class Maze {
     }
 
     public int getScore() {
-        System.out.println(getCoinsLeft());
+        // System.out.println(getCoinsLeft());
         return (collectibles.initalCoins - getCoinsLeft()) * 10;
     }
 

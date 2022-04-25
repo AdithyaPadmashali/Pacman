@@ -17,6 +17,7 @@ public class Player extends Entity {
     KeyHandler keyH;
     // public int score=0;
     BufferedImage test;
+    BufferedImage life;
 
     Font f1 = new Font("Arial", Font.BOLD, 18);
 
@@ -25,10 +26,17 @@ public class Player extends Entity {
     public int score;
     // public boolean collidedWithWall;
 
+    int rect;
+    boolean moved;
+    boolean a_star_moved;
+    int prev_player_position_x;
+    int prev_player_position_y;
+
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.score = 0;
         this.keyH = keyH;
+        this.rect = 3;
         this.openMouth = true;
         this.collidedWithWall = false;
         this.collidedWithEntity = false;
@@ -51,6 +59,7 @@ public class Player extends Entity {
             left1 = ImageIO.read(getClass().getResourceAsStream("/pacman-left1.png"));
             up1 = ImageIO.read(getClass().getResourceAsStream("/topfromleft1.png"));
             down1 = ImageIO.read(getClass().getResourceAsStream("/downfromleft1.png"));
+            life = ImageIO.read(getClass().getResourceAsStream("/life.png"));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -160,6 +169,23 @@ public class Player extends Entity {
         }
 
         g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
+    }
+
+    public void showRemaining(Graphics2D g2) {
+        // System.out.println("Show Remaining called " + rect);
+        BufferedImage image = life;
+        if (rect >= 1) {
+            g2.drawImage(image, gp.tileSize * 1, gp.tileSize * 11, gp.tileSize, gp.tileSize, null);
+            // System.out.println(" 1 from player");
+        }
+        if (rect >= 2) {
+            g2.drawImage(image, gp.tileSize * 2, gp.tileSize * 11, gp.tileSize, gp.tileSize, null);
+            // System.out.println(" 2 from player");
+        }
+        if (rect >= 3) {
+            g2.drawImage(image, gp.tileSize * 3, gp.tileSize * 11, gp.tileSize, gp.tileSize, null);
+            // System.out.println(" 3 from player");
+        }
     }
 
     // public void showScore(Graphics2D g2) {

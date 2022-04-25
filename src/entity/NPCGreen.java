@@ -18,6 +18,7 @@ public class NPCGreen extends Entity {
     KeyHandler keyH;
     Player pacman;
     BufferedImage test;
+    // int reliefCounter;
 
     String[] d_list = { "up", "down", "left", "right" };
     int r_direction;
@@ -113,10 +114,13 @@ public class NPCGreen extends Entity {
         gp.cChecker.checkEntityCollision(gp.player, this);
 
         if (collidedWithEntity) {
-            gp.playing = false;
-            gp.gameOver = true;
-            this.setDefaultValues();
-
+            if (gp.player.rect <= 0) {
+                gp.playing = false;
+                gp.gameOver = true;
+            }
+            this.collidedWithEntity = false;
+            gp.player.setDefaultValues();
+            gp.player.rect -= 1;
         }
 
         if (gp.difficulty == 0) {

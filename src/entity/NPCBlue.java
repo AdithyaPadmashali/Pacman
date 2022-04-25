@@ -18,6 +18,8 @@ public class NPCBlue extends Entity {
     KeyHandler keyH;
     Player pacman;
     BufferedImage test;
+    // boolean toChangeLife;
+    // public int reliefCounter;
 
     String[] d_list = { "up", "down", "left", "right" };
     int r_direction;
@@ -57,6 +59,7 @@ public class NPCBlue extends Entity {
 
         this.collidedWithWall = false;
         gp.cChecker.checkWall2(this);
+        // System.out.println(collidedWithWall);
 
         if (!collidedWithWall) {
             int check;
@@ -126,7 +129,8 @@ public class NPCBlue extends Entity {
             x += speed;
         }
         if (direction.equals("caught")) {
-
+            // if (pacman.a_star_moved)
+            // gp.player.rect--;
             this.x = x;
             this.y = y;
         }
@@ -307,9 +311,13 @@ public class NPCBlue extends Entity {
         gp.cChecker.checkEntityCollision(gp.player, this);
 
         if (collidedWithEntity) {
-            gp.playing = false;
-            gp.gameOver = true;
-            this.setDefaultValues();
+            if (gp.player.rect <= 0) {
+                gp.playing = false;
+                gp.gameOver = true;
+            }
+            this.collidedWithEntity = false;
+            gp.player.setDefaultValues();
+            gp.player.rect -= 1;
         }
 
         if (gp.difficulty == 0) {
