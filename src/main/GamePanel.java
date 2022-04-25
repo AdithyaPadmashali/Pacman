@@ -38,6 +38,7 @@ public class GamePanel extends JPanel implements Runnable {
     public boolean toLoad;
     public boolean toSave;
     public boolean toLeaderboard;
+    public boolean toPushtoLeaderboard;
 
     // 0, 1 and 2 -> easy, medium and hard respectively.
     public int difficulty;
@@ -65,8 +66,9 @@ public class GamePanel extends JPanel implements Runnable {
         this.toSave = false;
         this.playing = false;
         this.atCongrats = false;
+        this.toPushtoLeaderboard = false;
         this.toLoad = false;
-        this.toLeaderboard=false;
+        this.toLeaderboard = false;
         this.difficulty = 0;
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
@@ -177,9 +179,11 @@ public class GamePanel extends JPanel implements Runnable {
             this.toSave = false;
             this.toLoad = false;
             player.score = 0;
-            leaderboard.pushRecords(this);
-        }
-        else if(this.toLeaderboard){
+            if (this.toPushtoLeaderboard == true) {
+                leaderboard.pushRecords(this);
+                this.toPushtoLeaderboard = false;
+            }
+        } else if (this.toLeaderboard) {
             leaderboard.showRecords(g2);
         }
         g2.dispose();

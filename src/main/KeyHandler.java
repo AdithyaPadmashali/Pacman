@@ -87,15 +87,15 @@ public class KeyHandler implements KeyListener {
             gp.paused = !gp.paused;
         }
 
-        //leaderboard screen
+        // leaderboard screen
         if (code == KeyEvent.VK_ENTER && gp.ui.optionNumber == 2) {
-            gp.atCongrats=false;
-            gp.playing=false;
-            gp.atSelectDifficulty=false;
-            gp.paused=false;
-            gp.gameOver=false;
-            gp.atTitleScreen=false;
-            gp.toLeaderboard=true;
+            gp.atCongrats = false;
+            gp.playing = false;
+            gp.atSelectDifficulty = false;
+            gp.paused = false;
+            gp.gameOver = false;
+            gp.atTitleScreen = false;
+            gp.toLeaderboard = true;
         }
 
         // for exiting from the title screen
@@ -124,7 +124,7 @@ public class KeyHandler implements KeyListener {
             gp.toLoad = true;
             gp.playing = true;
             gp.paused = false;
-            gp.atCongrats=false;
+            gp.atCongrats = false;
             gp.atTitleScreen = false;
         }
 
@@ -138,7 +138,9 @@ public class KeyHandler implements KeyListener {
         }
 
         if (gp.player.score == 240) {
+            gp.player.score = 0;
             gp.playing = false;
+            gp.toPushtoLeaderboard = true;
             gp.atCongrats = true;
             gp.gameOver = false;
             gp.paused = false;
