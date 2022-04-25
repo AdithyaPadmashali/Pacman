@@ -78,6 +78,7 @@ public class Maze {
     }
 
     public int getScore() {
+        System.out.println(getCoinsLeft());
         return (collectibles.initalCoins - getCoinsLeft()) * 10;
     }
 
@@ -98,6 +99,7 @@ public class Maze {
             this.y += gp.tileSize;
         }
         this.setDefaultValues();
+        // System.out.println(collectibles.getCollectibles()[1][3]);
 
     }
 }

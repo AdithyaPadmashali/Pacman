@@ -103,10 +103,12 @@ public class CollisionChecker {
     public void checkCollectible(Maze maze) {
         if (maze.collectibles.getCollectibles()[(gp.player.y + 8) / 48][(gp.player.x + 8) / 48] == 3) {
             maze.collectibles.setCollectibles((gp.player.y + 8) / 48, (gp.player.x + 8) / 48, 2);
+
         } else if (maze.collectibles.getCollectibles()[(gp.player.y + gp.tileSize - 7)
                 / 48][(gp.player.x + gp.tileSize - 7) / 48] == 3) {
             maze.collectibles.setCollectibles((gp.player.y + gp.tileSize - 7)
                     / 48 / 48, (gp.player.x + gp.tileSize - 7) / 48, 2);
         }
+
     }
 }

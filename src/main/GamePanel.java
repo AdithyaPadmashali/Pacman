@@ -26,6 +26,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenWidth = tileSize * maxScreenlCol; // 768
     public final int screenHeight = tileSize * maxScreenlRow; // 576
 
+    public int score = 0;
+
     // GAME STATES
     public boolean paused;
     public boolean atTitleScreen;
@@ -51,6 +53,7 @@ public class GamePanel extends JPanel implements Runnable {
     public NPCPurple NPCPurple = new NPCPurple(this, keyH, player);
     public NPCWhite NPCWhite = new NPCWhite(this, keyH, player);
     UI ui = new UI(this, keyH);
+    Leaderboard leaderboard = new Leaderboard();
 
     public CollisionChecker cChecker = new CollisionChecker(this);
 
@@ -104,6 +107,7 @@ public class GamePanel extends JPanel implements Runnable {
             NPCPurple.update();
             NPCWhite.update();
             maze.update();
+            // leaderboard.showRecords();
         }
 
     }
@@ -146,6 +150,7 @@ public class GamePanel extends JPanel implements Runnable {
             NPCPurple.draw(g2);
             NPCWhite.draw(g2);
             player.draw(g2);
+            ui.draw(g2);
 
         } else if (this.gameOver) {
             ui.draw(g2);

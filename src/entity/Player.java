@@ -8,12 +8,17 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 
+import java.awt.Color;
+import java.awt.Font;
+
 public class Player extends Entity {
 
     GamePanel gp;
     KeyHandler keyH;
-
+    // public int score=0;
     BufferedImage test;
+
+    Font f1 = new Font("Arial", Font.BOLD, 18);
 
     boolean openMouth;
 
@@ -156,4 +161,13 @@ public class Player extends Entity {
 
         g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
     }
+
+    // public void showScore(Graphics2D g2) {
+    // g2.setFont(f1);
+    // g2.setColor(Color.WHITE);
+    // String s = Integer.toString(gp.score);
+    // g2.drawString("Score : ", 24, 24);
+    // g2.drawString(s, 96, 24);
+    // }
+
 }
