@@ -161,6 +161,7 @@ public class Player extends Entity {
         String s=Integer.toString(gp.score);
         g2.drawString("Score : ", 24, 24);
         g2.drawString(s, 96, 24);
+        
     }
 
 }
