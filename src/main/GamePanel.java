@@ -8,22 +8,24 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import entity.NPCGreen;
-import entity.Maze;
 import entity.NPCBlue;
 import entity.NPCPurple;
 import entity.NPCWhite;
 import entity.Player;
 
+
 public class GamePanel extends JPanel implements Runnable {
-    final int originalTileSize = 16 ;// 16pixels sqare
+    final int originalTileSize = 16; // 16pixels sqare
     final int scale = 3;
 
     public final int tileSize = originalTileSize * scale; // Actual tile size
     final int maxScreenlCol = 16;
     final int maxScreenlRow = 12;
+    
+    public final int screenWidth = tileSize * maxScreenlCol; // 768
+    public final int screenHeight = tileSize * maxScreenlRow; // 576
 
-    final int screenWidth = tileSize * maxScreenlCol; // 768
-    final int screenHeight = tileSize * maxScreenlRow; // 576
+    public int score=0;
 
     // GAME STATES
     public boolean paused;
@@ -33,19 +35,19 @@ public class GamePanel extends JPanel implements Runnable {
     public int difficulty;
 
     // FPS
-    final int FPS = 10;
+    final int FPS = 60;
 
     Thread gameThread;
     KeyHandler keyH = new KeyHandler(this);
-    Player player = new Player(this, keyH);
     Maze maze = new Maze(this, keyH);
-    NPCGreen NPCGreen = new NPCGreen(this, keyH, player,maze);
-   
-    NPCPurple NPCPurple = new NPCPurple(this, keyH, player,maze);
-    NPCWhite NPCWhite = new NPCWhite(this, keyH, player,maze);
-    
+    public Player player = new Player(this, keyH);
+    NPCGreen NPCGreen = new NPCGreen(this, keyH, player);
+    NPCBlue NPCBlue = new NPCBlue(this, keyH, player);
+    NPCPurple NPCPurple = new NPCPurple(this, keyH, player);
+    NPCWhite NPCWhite = new NPCWhite(this, keyH, player);
     UI ui = new UI(this, keyH);
-    NPCBlue NPCBlue = new NPCBlue(this, keyH, player,  maze);
+
+    public CollisionChecker cChecker = new CollisionChecker(this);
 
     public GamePanel() {
         this.paused = false;
@@ -88,21 +90,19 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
         if (!this.paused) {
-            player.update();
+            maze.update();
+            
             NPCGreen.update();
-         
             NPCBlue.update();
-        
             NPCPurple.update();
             NPCWhite.update();
-            
-            maze.update();
+            player.update();
         }
     }
 
     // This one is a Standard method
     public void paintComponent(Graphics g) {
-
+       
         // Parent class is JPanel
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g; // change to 2d graphics object
@@ -120,8 +120,9 @@ public class GamePanel extends JPanel implements Runnable {
             NPCPurple.draw(g2);
             NPCWhite.draw(g2);
             player.draw(g2);
+            player.showScore(g2);
+            player.showRemaining(g2);
             update();
-            
         }
         g2.dispose();
     }

@@ -1,7 +1,7 @@
- package main;
+package main;
 
-  
-   
+import java.lang.ref.Cleaner;
+
 import javax.swing.JFrame;
 
 public class Main {
@@ -9,7 +9,7 @@ public class Main {
 
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(true);
+        window.setResizable(false);
         window.setTitle("Pacman?");
 
         GamePanel gamePanel = new GamePanel();
@@ -22,4 +22,3 @@ public class Main {
         gamePanel.startGameThread();
     }
 }
-
