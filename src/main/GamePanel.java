@@ -47,6 +47,7 @@ public class GamePanel extends JPanel implements Runnable {
     final int FPS = 60;
 
     Thread gameThread;
+    Thread tThread;
     KeyHandler keyH = new KeyHandler(this);
     Maze maze = new Maze(this, keyH);
     public Player player = new Player(this, keyH);
@@ -280,5 +281,6 @@ public class GamePanel extends JPanel implements Runnable {
         gameThread = new Thread(this);
         gameThread.start();
     }
+
 
 }
