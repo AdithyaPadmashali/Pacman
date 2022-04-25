@@ -85,16 +85,21 @@ public class NPCBlue extends Entity {
         } else {
             switch (direction) {
                 case "up":
-                    direction = "down";
+                    String[] possibleDirections = { "left", "right" };
+                    direction = possibleDirections[0 + (int) (Math.random() * 1)];
+
                     break;
                 case "down":
-                    direction = "up";
+                    String[] possibleDirections1 = { "left", "right" };
+                    direction = possibleDirections1[0 + (int) (Math.random() * 1)];
                     break;
                 case "left":
-                    direction = "right";
+                    String[] possibleDirections2 = { "down", "up" };
+                    direction = possibleDirections2[0 + (int) (Math.random() * 1)];
                     break;
                 case "right":
-                    direction = "left";
+                    String[] possibleDirections3 = { "down", "up" };
+                    direction = possibleDirections3[0 + (int) (Math.random() * 1)];
                     break;
             }
         }
@@ -303,7 +308,7 @@ public class NPCBlue extends Entity {
 
         if (collidedWithEntity) {
             gp.playing = false;
-            gp.atTitleScreen = true;
+            gp.gameOver = true;
             this.setDefaultValues();
         }
 

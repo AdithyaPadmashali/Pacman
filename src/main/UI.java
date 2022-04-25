@@ -44,6 +44,10 @@ public class UI {
             this.displayTitleScreen(g2);
         } else if (gp.atSelectDifficulty) {
             this.displaySelectDifficulty(g2);
+        } else if (gp.gameOver) {
+            this.displayGameOver(g2);
+        } else if (gp.atCongrats) {
+            this.displayCongrats(g2);
         }
     }
 
@@ -99,4 +103,13 @@ public class UI {
         g2.drawString("press p to resume", x + 2 * gp.tileSize, y + gp.tileSize);
     }
 
+    public void displayCongrats(Graphics2D g2) {
+        g2.drawString("CONGRATULATIONS", x + 2 * gp.tileSize, y);
+        g2.drawString("press ESC to quit to main menu", x + 0 * gp.tileSize, y + gp.tileSize);
+    }
+
+    public void displayGameOver(Graphics2D g2) {
+        g2.drawString("GAME OVER", x + 2 * gp.tileSize, y);
+        g2.drawString("press ESC to quit to main menu", x + 0 * gp.tileSize, y + gp.tileSize);
+    }
 }

@@ -5,7 +5,9 @@ import entity.Entity;
 public class CollisionChecker {
 
     GamePanel gp;
-    int[][] board = new Board().getBoard();
+    Board board1 = new Board();
+    int[][] board = board1.getBoard();
+    int[][] collectibles = board1.collectibles;
 
     public CollisionChecker(GamePanel gp) {
         this.gp = gp;
@@ -95,6 +97,16 @@ public class CollisionChecker {
                         && ((e1.y + gp.tileSize) - (e2.y + gp.tileSize) <= 16) && e1.x == e2.x)) {
             e1.collidedWithEntity = true;
             e2.collidedWithEntity = true;
+        }
+    }
+
+    public void checkCollectible(Maze maze) {
+        if (maze.collectibles.getCollectibles()[(gp.player.y + 8) / 48][(gp.player.x + 8) / 48] == 3) {
+            maze.collectibles.setCollectibles((gp.player.y + 8) / 48, (gp.player.x + 8) / 48, 2);
+        } else if (maze.collectibles.getCollectibles()[(gp.player.y + gp.tileSize - 7)
+                / 48][(gp.player.x + gp.tileSize - 7) / 48] == 3) {
+            maze.collectibles.setCollectibles((gp.player.y + gp.tileSize - 7)
+                    / 48 / 48, (gp.player.x + gp.tileSize - 7) / 48, 2);
         }
     }
 }

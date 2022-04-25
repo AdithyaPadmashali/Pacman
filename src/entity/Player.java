@@ -16,10 +16,13 @@ public class Player extends Entity {
     BufferedImage test;
 
     boolean openMouth;
+
+    public int score;
     // public boolean collidedWithWall;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
+        this.score = 0;
         this.keyH = keyH;
         this.openMouth = true;
         this.collidedWithWall = false;
@@ -27,7 +30,6 @@ public class Player extends Entity {
         this.setDefaultValues();
         this.getPlayerImage();
         try {
-
             test = ImageIO.read(getClass().getResourceAsStream("/test.png"));
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,7 +121,7 @@ public class Player extends Entity {
 
     public void draw(Graphics2D g2) {
 
-        BufferedImage image = null;
+        // BufferedImage image = null;
 
         switch (direction) {
             case "right":
