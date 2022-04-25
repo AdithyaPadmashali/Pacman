@@ -45,6 +45,7 @@ public class GamePanel extends JPanel implements Runnable {
     NPCPurple NPCPurple = new NPCPurple(this, keyH, player);
     NPCWhite NPCWhite = new NPCWhite(this, keyH, player);
     UI ui = new UI(this, keyH);
+    Leaderboard leaderboard=new Leaderboard();
 
     public CollisionChecker cChecker = new CollisionChecker(this);
 
@@ -95,6 +96,7 @@ public class GamePanel extends JPanel implements Runnable {
             NPCBlue.update();
             NPCPurple.update();
             NPCWhite.update();
+            //leaderboard.showRecords();
         }
     }
 

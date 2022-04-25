@@ -11,6 +11,7 @@ import main.GamePanel;
 import java.awt.Color;
 import java.awt.Font;
 
+
 public class Player extends Entity {
 
     GamePanel gp;
@@ -161,4 +162,5 @@ public class Player extends Entity {
         g2.drawString("Score : ", 24, 24);
         g2.drawString(s, 96, 24);
     }
+
 }

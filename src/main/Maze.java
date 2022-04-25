@@ -77,7 +77,7 @@ public class Maze {
             this.y += gp.tileSize;
         }
         this.setDefaultValues();
-        System.out.println(collectibles.getCollectibles()[1][3]);
+        //System.out.println(collectibles.getCollectibles()[1][3]);
 
     }
 }

@@ -83,7 +83,7 @@ public class UI {
             g2.drawString(">", x + 2 * gp.tileSize, y + gp.tileSize * 3);
         }
 
-        g2.drawString("Load Game", x + 3 * gp.tileSize, y + gp.tileSize * 4);
+        g2.drawString("Leaderboard", x + 3 * gp.tileSize, y + gp.tileSize * 4);
         if (optionNumber == 1) {
             g2.drawString(">", x + 2 * gp.tileSize, y + gp.tileSize * 4);
         }
