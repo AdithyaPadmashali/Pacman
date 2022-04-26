@@ -2,12 +2,16 @@ package main;
 
 import java.io.*;
 
-import javax.swing.JPanel;
+import javax.swing.*;  
+
+//import javax.swing.JPanel;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.time.Duration;
+import java.time.Instant;
 
 import entity.NPCGreen;
 import entity.NPCBlue;
@@ -39,6 +43,7 @@ public class GamePanel extends JPanel implements Runnable {
     public boolean toSave;
     public boolean toLeaderboard;
     public boolean toPushtoLeaderboard;
+    public boolean enterName;
 
     // 0, 1 and 2 -> easy, medium and hard respectively.
     public int difficulty;
@@ -70,6 +75,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.toPushtoLeaderboard = false;
         this.toLoad = false;
         this.toLeaderboard = false;
+        this.enterName=false;
         this.difficulty = 0;
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
@@ -180,11 +186,12 @@ public class GamePanel extends JPanel implements Runnable {
             this.toSave = false;
             this.toLoad = false;
             player.score = 0;
+
             if (this.toPushtoLeaderboard == true) {
                 leaderboard.pushRecords(this);
                 this.toPushtoLeaderboard = false;
-                this.atCongrats=false;
-                this.atTitleScreen=true;
+                this.atCongrats=true;
+                //this.atTitleScreen=true;
             }
         } else if (this.toLeaderboard) {
             leaderboard.showRecords(g2);
