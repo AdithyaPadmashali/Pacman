@@ -109,33 +109,130 @@ public class NPCBlue extends Entity {
     }
 
     private void updatePositionHard() {
-        // System.out.println("out");
-        direction = getNextPosition(board, pacman);
-        // System.out.println(x + " " + y);
+        // System.out.println("detected pacman at x=" + pacman.x + " and y=" +
+       // pacman.y);
+       //System.out.println("out");
+       direction =getNextPosition(board, pacman);
 
-        if (direction.equals("up")) {
-            y -= speed;
-        }
-        if (direction.equals("down")) {
+       System.out.println("D "+direction);
+     
+       
+       if(direction.equals("up"))
+       {   
+          /* int rem = y%gp.tileSize;
+           
+           if (rem>speed || rem==0)
+           y-=speed;
+           else
+           y-=rem;*/
 
-            y += speed;
-        }
-        if (direction.equals("left")) {
+           y-=speed;
+           int currRow = y/gp.tileSize;
+           int currColumn = x/gp.tileSize;
+           if(x%gp.tileSize != 0){
+           if (board[currRow][currColumn+1] == 1)
+           {
+               x=gp.tileSize*currColumn;
+               y=gp.tileSize*currRow;
+           }}
+       }
+       if(direction.equals("down"))
+       {   
+           /*int rem = gp.tileSize-(y%gp.tileSize);
+          
+           if (rem > speed || rem ==0)
+           y+=speed;
+           else
+           y+=rem;*/
+           y+=speed;
+           int currRow = (y+gp.tileSize)/gp.tileSize;
+           int currColumn = x/gp.tileSize;
+           if(x%gp.tileSize != 0){
+           if (board[currRow][currColumn] == 1)
+           {
+               y=gp.tileSize * (currRow-1);
+               x=gp.tileSize*currColumn;
+           }
+           else if (board[currRow][currColumn-1] == 1)
+           {
+               y=gp.tileSize * (currRow-1);
+               x=gp.tileSize*currColumn;
+           }}
+       }
+       if(direction.equals("left"))
+       {  
+          
 
-            x -= speed;
-        }
-        if (direction.equals("right")) {
+           
+        /*   int rem = x%gp.tileSize;
+           if(rem>speed || rem==0)
+           x-=speed;
+           else
+           x-=rem;*/
 
-            x += speed;
-        }
-        if (direction.equals("caught")) {
-            // if (pacman.a_star_moved)
-            // gp.player.rect--;
-            this.x = x;
-            this.y = y;
-        }
-    }
+           x-=speed;
+           int currRow = y/gp.tileSize;
+           int currColumn = x/gp.tileSize;
+           if(y%gp.tileSize != 0){
+           if (board[currRow+1][currColumn]==1)
+           {
+               x=gp.tileSize * currColumn;
+               y=gp.tileSize * currRow;
+           }}
+       }
+       if(direction.equals("right"))
+       {
+          
+           /*int rem = gp.tileSize-(x%gp.tileSize);
+           if (rem>speed || rem ==0)
+           x+=speed;
+           else
+           x+=rem;*/
 
+           x+=speed;
+           int currRow = y/gp.tileSize;
+           int currColumn = (x+gp.tileSize)/gp.tileSize;
+           if(y%gp.tileSize != 0){
+           if (board[currRow][currColumn] == 1)
+           {  
+               x=gp.tileSize*(currColumn - 1);
+               y=gp.tileSize*currRow;
+
+           }
+           else if (board[currRow+1][currColumn] == 1)
+           {  
+               x=gp.tileSize*(currColumn -1);
+               y=gp.tileSize*currRow;
+
+           }
+       }
+           
+
+
+
+
+
+       }
+       if(direction.equals("caught"))
+       {   
+           x=x;
+           y=y;
+         
+           //System.out.println(pacman.moved);
+       }
+       if(direction.equals("b"))
+       {
+           
+           x=x;
+           y=y;
+       }
+       
+      // System.out.println("x position "+x);
+      // System.out.println("y position"+y);
+    
+   }
+
+   
     public String getNextPosition(int board[][], Player pacman) {
         int c = 0;
         // frontier queue
