@@ -10,8 +10,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.time.Duration;
-import java.time.Instant;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import entity.NPCGreen;
 import entity.NPCBlue;
@@ -45,6 +46,7 @@ public class GamePanel extends JPanel implements Runnable {
     public boolean toPushtoLeaderboard;
     public boolean enterName;
 
+
     // 0, 1 and 2 -> easy, medium and hard respectively.
     public int difficulty;
 
@@ -62,6 +64,11 @@ public class GamePanel extends JPanel implements Runnable {
     public NPCWhite NPCWhite = new NPCWhite(this, keyH, player);
     UI ui = new UI(this, keyH);
     Leaderboard leaderboard = new Leaderboard();
+    //Form form=new Form();
+    JTextField yourInputField = new JTextField(16);
+    JFrame username;
+    JButton addButton;
+    String uname;
 
     public CollisionChecker cChecker = new CollisionChecker(this);
 
@@ -187,16 +194,47 @@ public class GamePanel extends JPanel implements Runnable {
             this.toLoad = false;
             player.score = 0;
 
-            if (this.toPushtoLeaderboard == true) {
-                leaderboard.pushRecords(this);
-                this.toPushtoLeaderboard = false;
-                this.atCongrats=true;
-                //this.atTitleScreen=true;
+            // if (this.toPushtoLeaderboard) {
+            //     leaderboard.pushRecords(this);
+            //     this.toPushtoLeaderboard = false;
+
+            // }
+
+            while(this.atCongrats){
+                username=new JFrame("Congratulations... Join the leaderboard");
+                username.setSize(1000, 1000);
+                username.setLayout(new GridLayout());
+                JLabel label = new JLabel("Enter name");
+                JTextField name = new JTextField(10);
+                addButton = new JButton("Add");
+                
+                username.add(label);
+                username.add(name);
+                username.add(addButton);
+                //uname=name.getText();
+                System.out.println(name.getText());
+                addButton(e -> leaderboard.pushRecords(this, name.getText()) );
+
+                addButton.addActionListener(new ActionListener(){
+                    public void actionPerformed(ActionEvent e){  
+                        username.dispose();
+                    }    
+                });
+
+                username.pack();
+                username.setVisible(true);
+                this.atCongrats=false;
+                this.atTitleScreen=true;
             }
         } else if (this.toLeaderboard) {
             leaderboard.showRecords(g2);
         }
         g2.dispose();
+    }
+
+    public void addButton(ActionListener actionListener){
+        addButton.addActionListener(actionListener);
+        username.dispose();
     }
 
     public void saveGame() {

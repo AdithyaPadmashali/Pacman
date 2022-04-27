@@ -140,14 +140,15 @@ public class KeyHandler implements KeyListener {
         if (gp.player.score == 240) {
             gp.player.score = 0;
             gp.playing = false;
-            gp.enterName=true;
             gp.atCongrats = true;
             gp.toPushtoLeaderboard = true;
+            //gp.enterName=true;
             gp.gameOver = false;
             gp.paused = false;
             gp.atTitleScreen = false;
             
         }
+
     }
 
 }
