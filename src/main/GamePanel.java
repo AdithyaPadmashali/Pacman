@@ -4,6 +4,7 @@ import java.io.*;
 
 import javax.swing.*;  
 
+
 //import javax.swing.JPanel;
 
 import java.awt.Graphics;
@@ -131,7 +132,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     // This one is a Standard method
-    public void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g){
 
         // Parent class is JPanel
         super.paintComponent(g);
@@ -179,6 +180,8 @@ public class GamePanel extends JPanel implements Runnable {
             NPCPurple.setDefaultValues();
             NPCWhite.setDefaultValues();
             maze.reset();
+            
+            
             this.toSave = false;
             this.toLoad = false;
             player.score = 0;

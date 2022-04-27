@@ -3,6 +3,8 @@ package main;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+
+
 public class KeyHandler implements KeyListener {
 
     public boolean upPressed, downPressed, leftPressed, rightPressed;
@@ -107,7 +109,7 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_ENTER && gp.ui.optionNumber == 0) {
             gp.atTitleScreen = false;
             gp.atSelectDifficulty = true;
-            // gp.playing = true;
+            gp.playing = false;
         }
 
         // Select difficulty after the title screen
@@ -115,6 +117,8 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_SPACE) {
                 gp.difficulty = gp.ui.difficulty;
                 gp.atSelectDifficulty = false;
+                gp.gameOver=false;
+                gp.atCongrats=false;
                 gp.playing = true;
             }
         }

@@ -114,7 +114,7 @@ public class NPCBlue extends Entity {
        //System.out.println("out");
        direction =getNextPosition(board, pacman);
 
-       System.out.println("D "+direction);
+       //System.out.println("D "+direction);
      
        
        if(direction.equals("up"))
