@@ -249,7 +249,7 @@ public class GamePanel extends JPanel implements Runnable {
             String text = new String(player.x + " " + player.y);
             text += " " + player.direction;
             text += " " + player.score;
-
+            text += " " + player.rect;
             // save maze details
             // have to save this.maze.collectibles
 
@@ -294,7 +294,7 @@ public class GamePanel extends JPanel implements Runnable {
             player.y = Integer.parseInt(values[1]);
             player.direction = values[2];
             player.score = Integer.parseInt(values[3]);
-
+            player.rect  = Integer.parseInt(values[4]);
             // Load the previously mapped collectibles (2d array)
             String savedCollectibles = "collectibleState.txt";
             int[][] loadedCollectibles = new int[this.maxScreenlRow][this.maxScreenlCol];

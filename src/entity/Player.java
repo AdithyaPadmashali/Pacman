@@ -26,7 +26,7 @@ public class Player extends Entity {
     public int score;
     // public boolean collidedWithWall;
 
-    int rect;
+    public int rect;
     boolean moved;
     boolean a_star_moved;
     int prev_player_position_x;
@@ -75,7 +75,7 @@ public class Player extends Entity {
 
     public void update() {
 
-        if(gp.difficulty == 0){
+        if(gp.difficulty == 1){
             this.speed = 2;
         }
 
