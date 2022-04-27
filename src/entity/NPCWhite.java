@@ -125,9 +125,10 @@ public class NPCWhite extends Entity {
             gp.player.rect -= 1;
         }
 
-        if (gp.difficulty == 0) {
+        if (gp.difficulty == 0 || gp.difficulty == 1) {
             updatePositionRandom();
-        } else if (gp.difficulty == 2) {
+        } 
+        else if (gp.difficulty == 2) {
             updatePositionRandom();
         }
     }

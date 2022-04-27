@@ -74,6 +74,11 @@ public class Player extends Entity {
     }
 
     public void update() {
+
+        if(gp.difficulty == 0){
+            this.speed = 2;
+        }
+
         if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
 
             if (keyH.upPressed) {
