@@ -142,13 +142,10 @@ public class KeyHandler implements KeyListener {
             gp.playing = false;
             gp.atCongrats = true;
             gp.toPushtoLeaderboard = true;
-            //gp.enterName=true;
+            gp.enterName=true;
             gp.gameOver = false;
             gp.paused = false;
             gp.atTitleScreen = false;
-            
         }
-
     }
-
 }

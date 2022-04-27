@@ -200,10 +200,11 @@ public class GamePanel extends JPanel implements Runnable {
 
             // }
 
-            while(this.atCongrats){
+            while(this.enterName){
                 username=new JFrame("Congratulations... Join the leaderboard");
-                username.setSize(1000, 1000);
                 username.setLayout(new GridLayout());
+                
+                
                 JLabel label = new JLabel("Enter name");
                 JTextField name = new JTextField(10);
                 addButton = new JButton("Add");
@@ -222,9 +223,10 @@ public class GamePanel extends JPanel implements Runnable {
                 });
 
                 username.pack();
+                username.setLocationRelativeTo(null);
+                username.setSize(400, 75);
                 username.setVisible(true);
-                this.atCongrats=false;
-                this.atTitleScreen=true;
+                this.enterName=false;
             }
         } else if (this.toLeaderboard) {
             leaderboard.showRecords(g2);
